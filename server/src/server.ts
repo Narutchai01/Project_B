@@ -20,9 +20,18 @@ const secret = config.JWT_SECRET;
 
 // use
 app.use(json());
-app.use(cors());
+app.use(cors(
+    {
+        origin: 'http://localhost:5173',
+        credentials: true,
+    }
+));
 app.use(cookieParser());
-
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // connect to db
 try {
@@ -58,6 +67,7 @@ app.post('/api/register', async (req, res) => {
 
 
 app.post('/api/login', async (req, res) => {
+
     try {
         const { email, password } = req.body;
         const user: any = await client.db(dbanem).collection('users').findOne({ email });
@@ -65,9 +75,11 @@ app.post('/api/login', async (req, res) => {
         if (!matchPassword) {
             res.status(401).json({ message: 'wrong password' });
         }
+        return false;
         const token = jwt.sign({ email }, secret, { expiresIn: '1h' })
+        res.cookie('token', '12', { httpOnly: true });
+
         res.status(200).json({ message: 'user logged in', token });
-        ;
 
     }
     catch (err) {
@@ -75,21 +87,26 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+
+
+
 app.get('/api/verify', async (req, res) => {
     try {
-        const authHeader:any = req.headers.authorization;
-        const token = authHeader.split(' ')[1];
-        const verify = jwt.verify(token, secret);
-        if (!verify) {
+
+        const authToken = req.cookies.token;
+        const verifyToken = jwt.verify(authToken, secret);
+        if (verifyToken) {
+            const getUser = await client.db(dbanem).collection('users').findOne();
+            res.status(200).json({ message: 'user verified', getUser });
+        }
+        else {
             res.status(401).json({ message: 'user not verified' });
         }
-        console.log(verify);
-        
-        const getUser = await client.db(dbanem).collection('users').findOne();
-        res.status(200).json({ message: 'user verified', getUser });
+
+
     }
-    catch (err) {
-        res.status(401).json({ message: 'something went wrong' });
+    catch {
+        res.status(401).json({ message: 'user not verified' });
     }
 });
 

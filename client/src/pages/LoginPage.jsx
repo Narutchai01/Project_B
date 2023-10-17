@@ -3,6 +3,14 @@ import axios from "axios"
 
 const LoginPage = () => {
 
+
+    const axiosInstance = axios.create({
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
     const [Login, setLogin] = useState(
         {
             email: ''
@@ -13,46 +21,51 @@ const LoginPage = () => {
         setLogin({ ...Login, [e.target.name]: e.target.value })
     }
 
-    const handelLogin = (e) => {
-        try{
+    const handelLogin = async (e) => {
+        try {
             e.preventDefault()
             const LoginData = {
                 email: Login.email
                 , password: Login.password
             }
             console.log(LoginData);
-            axios.post('http://localhost:8080/api/login', LoginData)
+            await axios.post('http://localhost:8080/api/login', LoginData, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
                 })
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
 
     const getToken = () => {
-        try{
-            axios.get('http://localhost:8080/api/verify')
+        try {
+            axios.get('http://localhost:8080/api/verify', axiosInstance)
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
                 })
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
 
-    
+
 
     return (
         <>
             <h1>Login</h1>
             <form onSubmit={handelLogin}>
                 <input type="text" name='email' placeholder="email" onChange={handleChange} />
-                <input type="text" name="password" placeholder="password" onChange={handleChange}/>
+                <input type="text" name="password" placeholder="password" onChange={handleChange} />
                 <button type="submit">Login</button>
             </form>
             <button onClick={getToken}>GetToken</button>
