@@ -29,7 +29,7 @@ const LoginPage = () => {
                 , password: Login.password
             }
             console.log(LoginData);
-            await axios.post('http://localhost:8080/api/login', LoginData, {
+            await axios.post('http://localhost:3000/api/login', LoginData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
