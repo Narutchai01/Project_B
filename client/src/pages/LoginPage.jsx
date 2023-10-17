@@ -4,12 +4,6 @@ import axios from "axios"
 const LoginPage = () => {
 
 
-    const axiosInstance = axios.create({
-        withCredentials: true,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
 
     const [Login, setLogin] = useState(
         {
@@ -45,9 +39,14 @@ const LoginPage = () => {
         }
     }
 
-    const getToken = () => {
+    const  getToken = async () => {
         try {
-            axios.get('http://localhost:8080/api/verify', axiosInstance)
+            await axios.get('http://localhost:8080/api/verify', {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);

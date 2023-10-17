@@ -75,12 +75,15 @@ app.post('/api/login', async (req, res) => {
         if (!matchPassword) {
             res.status(401).json({ message: 'wrong password' });
         }
-        return false;
+
         const token = jwt.sign({ email }, secret, { expiresIn: '1h' })
-        res.cookie('token', '12', { httpOnly: true });
-
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            maxAge: 10000
+        });
         res.status(200).json({ message: 'user logged in', token });
-
     }
     catch (err) {
         res.status(401).json({ message: 'something went wrong' });
@@ -92,23 +95,23 @@ app.post('/api/login', async (req, res) => {
 
 app.get('/api/verify', async (req, res) => {
     try {
-
-        const authToken = req.cookies.token;
-        const verifyToken = jwt.verify(authToken, secret);
-        if (verifyToken) {
-            const getUser = await client.db(dbanem).collection('users').findOne();
-            res.status(200).json({ message: 'user verified', getUser });
+        const token = req.cookies.token;
+        if (!token) {
+            res.status(401).json({ message: 'not authorized' });
         }
         else {
-            res.status(401).json({ message: 'user not verified' });
+            res.status(200).json({ message: 'authorized' });
         }
 
-
+        const decodedToken = jwt.verify(token, secret);
+        const dataUser = await client.db(dbanem).collection('users').findOne();
+        res.status(200).json({ message: 'authorized', decodedToken, dataUser });
+    } 
+    catch (err) {
+        res.status(401).json({ message: 'not authorized' });
     }
-    catch {
-        res.status(401).json({ message: 'user not verified' });
-    }
-});
+}
+);
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);
