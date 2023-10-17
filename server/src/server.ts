@@ -1,71 +1,99 @@
-import express, { Response, Request } from "express";
-import { MongoClient, ObjectId } from "mongodb";
-const app = express();
-import { json } from "body-parser";
-import { config } from "./config";
-const PORT = config.port;
-const DB_URL = config.DB_URL;
-app.use(json());
-import { User } from "./TypeOf";
-const client = new MongoClient(DB_URL);
+// import 
+const cors = require('cors');
+import express from 'express';
+import { MongoClient } from 'mongodb';
 const bcrypt = require('bcrypt');
-const encrypt = bcrypt.hashSync("myPassword", 10);
+import { config } from './config';
+import { json } from 'body-parser';
+const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 
+//define
+const app = express();
+const PORT = config.port || 3000;
+const URL = config.DB_URL;
+const client = new MongoClient(URL);
+const dbanem = 'test';
+const secret = config.JWT_SECRET;
 
 
-app.post('/register', async (req: Request, res: Response) => {
-    const user: User = req.body;
-    await client.connect();
+// use
+app.use(json());
+app.use(cors());
+app.use(cookieParser());
 
-    const Token = jwt.sign(user, config.JWT_SECRET);
-    await client.db("test").collection("devices").insertOne({
-        id: new ObjectId(),
-        username: user.username,
-        password: encrypt,
-        email: user.email,
-        Token: Token
-    });
-    await client.close();
-    res.status(201).json({
-        user: user,
-        token: Token
-    });
+
+// connect to db
+try {
+    client.connect();
+    console.log('connected to db');
+}
+catch (err) {
+    console.log(err);
+}
+
+
+// routes
+
+app.post('/api/register', async (req, res) => {
+    try {
+        const { email, password, username } = req.body;
+        const user = {
+            email,
+            password: await bcrypt.hash(password, 10),
+            username
+        }
+        await client.db(dbanem).collection('users').insertOne(user);
+        await client.close();
+        res.status(200).json({
+            message: 'user created',
+        });
+
+    }
+    catch (err) {
+        res.status(401).json({ message: 'something went wrong' });
+    }
 });
 
 
-app.post('/login', async (req: Request, res: Response) => {
-    await client.connect();
-    const user: User = req.body;
-    const userFromDb = await client.db("test").collection("devices").findOne({ username: user.username });
-    if (userFromDb) {
-        const isPasswordCorrect = bcrypt.compareSync(user.password, userFromDb.password);
-        if (isPasswordCorrect) {
-            const Token = jwt.sign(user, config.JWT_SECRET);
-            await client.db("test").collection("devices").updateOne({ username: user.username }, { $set: { Token: Token } });
-            await client.close();
-            res.status(200).json({
-                user: userFromDb,
-                token: Token
-            });
-        } else {
-            res.status(401).json({
-                message: "Password is incorrect"
-            });
+app.post('/api/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user: any = await client.db(dbanem).collection('users').findOne({ email });
+        const matchPassword = await bcrypt.compare(password, user.password)
+        if (!matchPassword) {
+            res.status(401).json({ message: 'wrong password' });
         }
-    } else {
-        res.status(404).json({
-            message: "User not found"
-        });
+        const token = jwt.sign({ email }, secret, { expiresIn: '1h' })
+        res.status(200).json({ message: 'user logged in', token });
+        ;
+
+    }
+    catch (err) {
+        res.status(401).json({ message: 'something went wrong' });
+    }
+});
+
+app.get('/api/verify', async (req, res) => {
+    try {
+        const authHeader:any = req.headers.authorization;
+        const token = authHeader.split(' ')[1];
+        const verify = jwt.verify(token, secret);
+        if (!verify) {
+            res.status(401).json({ message: 'user not verified' });
+        }
+        console.log(verify);
+        
+        const getUser = await client.db(dbanem).collection('users').findOne();
+        res.status(200).json({ message: 'user verified', getUser });
+    }
+    catch (err) {
+        res.status(401).json({ message: 'something went wrong' });
     }
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`server is running on http://localhost:${PORT}`);
+
 });
-
-
-
-
-
