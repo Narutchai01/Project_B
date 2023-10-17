@@ -65,7 +65,6 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-
 app.post('/api/login', async (req, res) => {
 
     try {
@@ -96,16 +95,9 @@ app.post('/api/login', async (req, res) => {
 app.get('/api/verify', async (req, res) => {
     try {
         const token = req.cookies.token;
-        if (!token) {
-            res.status(401).json({ message: 'not authorized' });
-        }
-        else {
-            res.status(200).json({ message: 'authorized' });
-        }
-
         const decodedToken = jwt.verify(token, secret);
-        const dataUser = await client.db(dbanem).collection('users').findOne();
-        res.status(200).json({ message: 'authorized', decodedToken, dataUser });
+        const dataUser = await client.db(dbanem).collection('users').findOne({});
+        res.status(200).json({ message: 'user verified', dataUser,decodedToken });
     } 
     catch (err) {
         res.status(401).json({ message: 'not authorized' });

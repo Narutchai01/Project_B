@@ -39,7 +39,7 @@ const LoginPage = () => {
         }
     }
 
-    const  getToken = async () => {
+    const getToken = async () => {
         try {
             await axios.get('http://localhost:8080/api/verify', {
                 withCredentials: true,

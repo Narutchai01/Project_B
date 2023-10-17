@@ -91,15 +91,9 @@ app.post('/api/login', (req, res) => __awaiter(void 0, void 0, void 0, function*
 app.get('/api/verify', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.cookies.token;
-        if (!token) {
-            res.status(401).json({ message: 'not authorized' });
-        }
-        else {
-            res.status(200).json({ message: 'authorized' });
-        }
         const decodedToken = jwt.verify(token, secret);
-        const dataUser = yield client.db(dbanem).collection('users').findOne();
-        res.status(200).json({ message: 'authorized', decodedToken, dataUser });
+        const dataUser = yield client.db(dbanem).collection('users').findOne({});
+        res.status(200).json({ message: 'user verified', dataUser, decodedToken });
     }
     catch (err) {
         res.status(401).json({ message: 'not authorized' });
