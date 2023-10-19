@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {  useState } from "react"
 import axios from "axios"
 
 const LoginPage = () => {
@@ -39,13 +39,14 @@ const LoginPage = () => {
         }
     }
 
-    const getToken = async () => {
+    const handelLogout = async (e) => {
         try {
-            await axios.get('http://localhost:8080/api/verify', {
+            e.preventDefault()
+            await axios.get('http://localhost:8080/api/me', {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
             })
                 .then(res => {
                     console.log(res);
@@ -55,9 +56,7 @@ const LoginPage = () => {
         catch (err) {
             console.log(err);
         }
-    }
-
-
+    }    
 
     return (
         <>
@@ -67,7 +66,7 @@ const LoginPage = () => {
                 <input type="text" name="password" placeholder="password" onChange={handleChange} />
                 <button type="submit">Login</button>
             </form>
-            <button onClick={getToken}>GetToken</button>
+            <button onClick={handelLogout} >Go to</button>
         </>
     )
 }

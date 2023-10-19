@@ -6,6 +6,7 @@ function App() {
 
   return (
     <>
+    <h1>Fluek</h1>
       <Routes>
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Register" element={<Register />} />
