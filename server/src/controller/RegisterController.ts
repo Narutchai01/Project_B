@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 import User from "./User";
+import { dbMG } from "./DatabaseMG";
+import { dbname } from '../server'
 
 
 class RegisterController {

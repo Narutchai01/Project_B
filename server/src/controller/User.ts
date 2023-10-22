@@ -1,16 +1,14 @@
+const bcrypt = require('bcryptjs');
+
+
 class User {
-    private id: string;
     private email: string;
     private password: string;
     private username: string;
-    constructor(id: string, email: string, password: string, username: string) {
-        this.id = id;
+    constructor(email: string, password: string, username: string) {
         this.email = email;
         this.password = password;
         this.username = username;
-    }
-    getId(): string {
-        return this.id;
     }
     getEmail(): string {
         return this.email;
