@@ -43,10 +43,16 @@ DatabaseMG_1.dbMG.connectTODB();
 // routes
 app.post('/api/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, password, email } = req.body;
-        const registerController = new RegisterController_1.default(username, password, email);
-        const result = yield registerController;
-        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne(result);
+        const { email, password, username } = req.body;
+        const registerController = new RegisterController_1.default(email, password, username);
+        const result = yield registerController.register();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne({
+            data: result,
+        });
         res.status(200).send(result);
     }
     catch (err) {
@@ -58,36 +64,48 @@ app.post('/api/login', (req, res) => __awaiter(void 0, void 0, void 0, function*
         const { email, password } = req.body;
         const loginController = new LoginController_1.default(email, password);
         const result = yield loginController.login();
-        if (!result) {
+        if (result) {
+            const token = jwt.sign({ email: result.email }, secret, { expiresIn: '1h' });
+            res.cookie('token', token, { httpOnly: true });
+            res.status(200).send(result);
+        }
+        else {
             res.status(401).send('unauthorized');
         }
-        const token = jwt.sign({ result }, secret);
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-        });
-        res.status(200).send({
-            result: result,
-        });
     }
     catch (err) {
         console.log(err);
     }
 }));
-app.get('/api/:username', auth_1.auth, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const username = req.params;
-    const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').findOne(username);
-    res.status(200).send(result);
-}));
-app.get('/api/logout', (req, res) => {
-    const token = req.cookies.token;
-    if (!token) {
-        res.status(401).send('unauthorized');
+app.get('/api/logout', auth_1.auth, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            res.status(401).send('unauthorized');
+        }
+        res.clearCookie('token');
+        res.status(200).send('logout');
     }
-    res.clearCookie('token');
-});
+    catch (err) {
+        console.log(err);
+    }
+}));
+app.get('/api/:user', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.params.user;
+    try {
+        const user = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').findOne({
+            'data.username': username,
+        });
+        if (!user) {
+            res.status(404).send('user not found');
+            return false;
+        }
+        res.status(200).send(user);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}));
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);
 });

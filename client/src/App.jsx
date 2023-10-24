@@ -26,9 +26,9 @@ const App = () => {
 
   return (
     <>
-      <div>{stage}</div>
+      {/* <div>{stage}</div>
       <button onClick={toggleGameObj}>Toggle</button>
-      {gameObj}
+      {gameObj} */}
       <Routes>
         <Route path='/' element={<Rootpage/>} />
         <Route path="/Login" element={<LoginPage />} />

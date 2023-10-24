@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt');
-
+/* 
 html, body, #root {
   margin: 0;
   padding: 0;
   background: black;
   color: white;
   font-family: 'Prompt', sans-serif;
-}
+} */
 
 .gameBar {
   width: 100vw;

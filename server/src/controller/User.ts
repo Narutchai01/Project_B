@@ -1,7 +1,5 @@
-const bcrypt = require('bcryptjs');
 
-
-class User {
+abstract class User {
     private email: string;
     private password: string;
     private username: string;
@@ -19,6 +17,8 @@ class User {
     getUsername(): string {
         return this.username;
     }
+    abstract login(): Promise<any>;
+    abstract register(): Promise<any>;
+    
 }
-
 export default User;

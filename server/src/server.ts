@@ -38,10 +38,16 @@ dbMG.connectTODB();
 // routes
 app.post('/api/register', async (req, res) => {
     try {
-        const { username, password, email } = req.body;
-        const registerController = new RegisterController(username, password, email);
-        const result = await registerController;
-        await dbMG.getClient().db(dbname).collection('users').insertOne(result);
+        const { email, password, username } = req.body;
+        const registerController = new RegisterController(email, password, username);
+        const result = await registerController.register();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        await dbMG.getClient().db(dbname).collection('users').insertOne({
+            data: result,
+        });
         res.status(200).send(result);
     }
     catch (err) {
@@ -54,41 +60,51 @@ app.post('/api/login', async (req, res) => {
         const { email, password } = req.body;
         const loginController = new LoginController(email, password);
         const result = await loginController.login();
-        if (!result) {
+        if (result) {
+            const token = jwt.sign({ email: result.email }, secret, { expiresIn: '1h' });
+            res.cookie('token', token, { httpOnly: true });
+            res.status(200).send(result);
+        }
+        else {
             res.status(401).send('unauthorized');
         }
-        const token = jwt.sign({ result }, secret);
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-        });
-        res.status(200).send({
-            result: result,
-        });
     }
     catch (err) {
         console.log(err);
     }
 });
 
-app.get('/api/:username', auth, async (req, res) => {
-    const username = req.params;
-    const result = await dbMG.getClient().db(dbname).collection('users').findOne(username);
-    res.status(200).send(result);
-});
 
-
-app.get('/api/logout', (req, res) => { 
-    const token = req.cookies.token;
-    if (!token) {
-        res.status(401).send('unauthorized');
+app.get('/api/logout', auth, async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            res.status(401).send('unauthorized');
+        }
+        res.clearCookie('token');
+        res.status(200).send('logout');
     }
-    res.clearCookie('token');
+    catch (err) {
+        console.log(err);
+    }
 });
 
 
+app.get('/api/:user',async (req, res) => {
+    const username = req.params.user;
+    try{
+        const user = await dbMG.getClient().db(dbname).collection('users').findOne({
+            'data.username': username,        });
+        if(!user){
+            res.status(404).send('user not found');
+            return false;
+        }
+        res.status(200).send(user);
+    }
+    catch(err){
+        console.log(err);
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);

@@ -1,17 +1,32 @@
 const bcrypt = require('bcrypt');
 import User from "./User";
-import { dbMG } from "./DatabaseMG";
-import { dbname } from '../server'
 
 
-class RegisterController {
-    private username: string;
-    private password: string;
-    private email: string;
-    constructor(username: string, password: string , email: string) {
-        this.username = username;
-        this.password = bcrypt.hashSync(password, 10);
-        this.email = email;
+class RegisterController extends User{  
+    constructor(email: string, password: string, username: string) {
+        super(email, password, username);
+    }
+
+    private async hashPassword(password: string): Promise<string> {
+        const salt = await bcrypt.genSalt(10);
+        return await bcrypt.hash(password, salt);
+    }
+    public async register(): Promise<any> {
+        try {
+            const hashedPassword = await this.hashPassword(this.getPassword());
+            const result = {
+                email: this.getEmail(),
+                password: hashedPassword,
+                username: this.getUsername(),
+            }
+            return result;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    login(): Promise<any> {
+        throw new Error("Method not implemented.");
     }
 }
 
