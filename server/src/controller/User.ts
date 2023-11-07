@@ -1,16 +1,12 @@
-class User {
-    private id: string;
+
+abstract class User {
     private email: string;
     private password: string;
     private username: string;
-    constructor(id: string, email: string, password: string, username: string) {
-        this.id = id;
+    constructor(email: string, password: string, username: string) {
         this.email = email;
         this.password = password;
         this.username = username;
-    }
-    getId(): string {
-        return this.id;
     }
     getEmail(): string {
         return this.email;
@@ -21,6 +17,8 @@ class User {
     getUsername(): string {
         return this.username;
     }
+    abstract login(): Promise<any>;
+    abstract register(): Promise<any>;
+    
 }
-
 export default User;

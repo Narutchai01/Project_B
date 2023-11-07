@@ -8,4 +8,4 @@ class authservice {
     }
 }
 
-export const auth = new authservice().headers;
+export const setUpcors =  new authservice().headers;

@@ -1,20 +1,20 @@
 // import 
 import LoginController from './controller/LoginController';
 const cors = require('cors');
-import express from 'express';
+import express, { response, request, NextFunction } from 'express';
 const bcrypt = require('bcrypt');
 import { config } from './config';
 import { json } from 'body-parser';
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const { header } = require('./middleware/headers');
 import { dbMG } from './controller/DatabaseMG';
 import RegisterController from './controller/RegisterController';
+import { auth } from './middleware/auth';
+
 
 //define
 const app = express();
 const PORT = config.port || 3000;
-const URL = config.DB_URL;
 export const dbname = 'test';
 const secret = config.JWT_SECRET;
 
@@ -37,11 +37,22 @@ dbMG.connectTODB();
 
 // routes
 app.post('/api/register', async (req, res) => {
-    const { username, password, email } = req.body;
-    const registerController = new RegisterController(username, password, email);
-    const result = await registerController;
-    await dbMG.getClient().db(dbname).collection('users').insertOne(result);
-    res.send(result);
+    try {
+        const { email, password, username } = req.body;
+        const registerController = new RegisterController(email, password, username);
+        const result = await registerController.register();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        await dbMG.getClient().db(dbname).collection('users').insertOne({
+            data: result,
+        });
+        res.status(200).send(result);
+    }
+    catch (err) {
+        console.log(err);
+    }
 });
 
 app.post('/api/login', async (req, res) => {
@@ -49,14 +60,48 @@ app.post('/api/login', async (req, res) => {
         const { email, password } = req.body;
         const loginController = new LoginController(email, password);
         const result = await loginController.login();
-        if (!result) {
-            res.status(404).send('user not found');
+        if (result) {
+            const token = jwt.sign({ email: result.email }, secret, { expiresIn: '1h' });
+            res.cookie('token', token, { httpOnly: true });
+            res.status(200).send(result);
         }
-        const token = jwt.sign({ id: result._id }, secret, { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true, maxAge: 3600000, sameSite: 'none', secure: true });
-        res.status(200).send({ result: result, token: token });
+        else {
+            res.status(401).send('unauthorized');
+        }
     }
     catch (err) {
+        console.log(err);
+    }
+});
+
+
+app.get('/api/logout', auth, async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            res.status(401).send('unauthorized');
+        }
+        res.clearCookie('token');
+        res.status(200).send('logout');
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+
+
+app.get('/api/:user',async (req, res) => {
+    const username = req.params.user;
+    try{
+        const user = await dbMG.getClient().db(dbname).collection('users').findOne({
+            'data.username': username,        });
+        if(!user){
+            res.status(404).send('user not found');
+            return false;
+        }
+        res.status(200).send(user);
+    }
+    catch(err){
         console.log(err);
     }
 });
