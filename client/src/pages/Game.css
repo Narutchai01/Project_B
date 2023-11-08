@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt');
-/* 
-html, body, #root {
+ 
+body {
   margin: 0;
   padding: 0;
-  background: black;
-  color: white;
-  font-family: 'Prompt', sans-serif;
-} */
+}
 
 .gameBar {
   width: 100vw;
@@ -35,7 +32,7 @@ html, body, #root {
   justify-content: center;
 }
 
-.canvas {
+.game .canvas {
   width: 90vw;
   height: 90vh;
   background: rgb(18, 18, 18);

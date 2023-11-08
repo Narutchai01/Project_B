@@ -1,12 +1,10 @@
 import './App.css'
 import { Routes,Route } from 'react-router-dom'
-import LoginPage from './pages/LoginPage'
-import Register from './pages/Register'
-import Homepage from './pages/Homepage'
-import Rootpage from './pages/Rootpage'
 import { useState } from 'react'
 
-import Game from './Game'
+import LandingPage from './pages/LandingPage'
+import Homepage from './pages/Homepage'
+import Game from './pages/Game'
 
 
 const App = () => {
@@ -30,9 +28,7 @@ const App = () => {
       <button onClick={toggleGameObj}>Toggle</button>
       {gameObj} */}
       <Routes>
-        <Route path='/' element={<Rootpage/>} />
-        <Route path="/Login" element={<LoginPage />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path='/' element={<LandingPage/>} />
         <Route path='/:username' element={<Homepage/>} />
       </Routes>
     </>

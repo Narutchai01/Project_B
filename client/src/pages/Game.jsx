@@ -5,8 +5,8 @@ import { OrbitControls, RoundedBox, Text } from '@react-three/drei'
 import { a } from '@react-spring/three'
 import './Game.css'
 
-import MineCube from './components/MineCube'
-import { init } from './util/Init'
+import MineCube from '../components/MineCube'
+import { init } from '../util/Init'
 
 
 class GameFunc {
