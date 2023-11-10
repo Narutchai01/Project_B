@@ -5,28 +5,32 @@ import axios from "axios"
 
 const Homepage = () => {
 
-    const { username } = useParams()
-    const [user, setUser] = useState({})
+    const {username} = useParams()
+    const [User, setUser] = useState({})
 
-    const fetchUser = async () => {
-        const res = await axios.get(`http://localhost:8080/api/${username}`, { withCredentials: true })
-        setUser(res.data)
-    }    
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/${username}`).then(res => {
+                setUser(res.data)
+            })
+            console.log(res.data);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 
+    console.log(User);
     useEffect(() => {
-        
-        fetchUser()
-    },)
-
-    console.log(user);
+        getUser()
+    })
 
     return (
         <>
-            <h1>{user._id}</h1>
-            <h1>{user.email}</h1>
-            <h1>{user.username}</h1>
+        <h1>{User.email}</h1>
         </>
     )
+
 }
 
 export default Homepage

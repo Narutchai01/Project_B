@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 
 
-const SignUpPage = ({ setSignUpPage, setLoginPage }) => {
+const SignUpPage = ({setSignUpPage,setLoginPage}) => {
 
   const [SignUp, setSignUp] = useState({
     username: ''
@@ -30,11 +30,11 @@ const SignUpPage = ({ setSignUpPage, setLoginPage }) => {
   return (
     <>
       <h1 className="">SignUp</h1>
-      <form className="">
+      <form className="" onSubmit={handelSignUp}>
         <input type="email" name="email" placeholder="Email" className="" onChange={handleChange} />
         <input type="text" name="username" placeholder="Username" className="" onChange={handleChange} />
         <input type="password" name="password" placeholder="Password" className="" onChange={handleChange} />
-        <button type="submit" className="" onClick={handelSignUp}>
+        <button type="submit" className="" >
             Create Account
         </button>
       </form>

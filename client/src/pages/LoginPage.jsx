@@ -31,7 +31,8 @@ const LoginPage = () => {
           'Content-Type': 'application/json'
         },
       }).then(res => {
-        navigate(`/${res.data.result.username}`)
+        console.log(res.data);
+        navigate(`/${res.data.username}`)
       }).catch(err => {
         console.log(err);
       })
