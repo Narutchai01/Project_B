@@ -1,3 +1,4 @@
+import { Result } from './../../client/node_modules/postcss-load-config/src/index.d';
 // import 
 import LoginController from './controller/LoginController';
 const cors = require('cors');
@@ -10,6 +11,7 @@ const jwt = require('jsonwebtoken');
 import { dbMG } from './controller/DatabaseMG';
 import RegisterController from './controller/RegisterController';
 import { auth } from './middleware/auth';
+import User from './controller/User';
 
 
 //define
@@ -45,9 +47,7 @@ app.post('/api/register', async (req, res) => {
             res.status(400).send('bad request');
             return false;
         }
-        await dbMG.getClient().db(dbname).collection('users').insertOne({
-            data: result,
-        });
+        await dbMG.getClient().db(dbname).collection('users').insertOne(Result);
         res.status(200).send(result);
     }
     catch (err) {
@@ -90,11 +90,12 @@ app.get('/api/logout', auth, async (req, res) => {
 });
 
 
-app.get('/api/:user',async (req, res) => {
-    const username = req.params.user;
+app.get('/api/:id',async (req, res) => {
+    const username = req.params.id;
     try{
         const user = await dbMG.getClient().db(dbname).collection('users').findOne({
-            'data.username': username,        });
+            username: username     
+        });
         if(!user){
             res.status(404).send('user not found');
             return false;

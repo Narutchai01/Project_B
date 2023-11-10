@@ -50,9 +50,7 @@ app.post('/api/register', (req, res) => __awaiter(void 0, void 0, void 0, functi
             res.status(400).send('bad request');
             return false;
         }
-        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne({
-            data: result,
-        });
+        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne(index_d_1.Result);
         res.status(200).send(result);
     }
     catch (err) {
@@ -90,11 +88,11 @@ app.get('/api/logout', auth_1.auth, (req, res) => __awaiter(void 0, void 0, void
         console.log(err);
     }
 }));
-app.get('/api/:user', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const username = req.params.user;
+app.get('/api/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.params.id;
     try {
         const user = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').findOne({
-            'data.username': username,
+            username: username
         });
         if (!user) {
             res.status(404).send('user not found');
