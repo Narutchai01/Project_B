@@ -1,9 +1,41 @@
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
 import axios from "axios"
-import './Homepage.css'
+
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Text } from '@react-three/drei'
 import { HiMiniUserCircle } from "react-icons/hi2";
 
+import './Homepage.css';
+
+
+const Cube = () => {
+    
+    const [LeaderboardHover , setLeaderboardhover] = useState(false)
+
+
+    return (
+        <mesh rotation={[0.8, -0.785, 0]}>
+            <ambientLight intensity={0.2} color='blue' />
+            <ambientLight intensity={0.2} color='white' />
+            <pointLight intensity={16} color='lightblue' position={[1.8, 2, 2]} />
+            <pointLight intensity={14} color='purple' position={[2, -3, 1.8]} />
+            <mesh>
+                <boxGeometry attach={'geometry'} args={[2, 2, 2]} />
+                <meshStandardMaterial attach={'material'} color={'white'} />
+            <Text
+                color={LeaderboardHover ? 'black':'white'}
+                position={[0.1 ,1.01, 0.1]} scale={[0.4, 0.4, 0.4]}
+                rotation={[-1.57 , 0 , 0.784]}
+                onPointerEnter={() => {setLeaderboardhover(true)}}
+                onPointerLeave={() => {setLeaderboardhover(false)}}>
+                Leaderboard
+            </Text>
+        
+            </mesh>
+        </mesh>
+        )
+    }
 
 const Homepage = () => {
 
@@ -27,9 +59,10 @@ const Homepage = () => {
         getUser()
     })
 
+    
     return (
         <>
-        <div className="Menu">
+        <div className="HomePage">
             <div className="Account" >
                 <a href="/account/:username/:mode"> 
                     <HiMiniUserCircle className="AccountPic"/>
@@ -37,7 +70,9 @@ const Homepage = () => {
                 
             </div>
             <div className="Box">
-
+                <Canvas>
+                    <Cube />
+                </Canvas>
             </div>
             <div className="Difficulty">
                 <h1>
