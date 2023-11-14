@@ -15,9 +15,9 @@ class LoginController extends User  {
     }
     async login() {
         try {
-            const user = await dbMG.getClient().db(dbname).collection('users').findOne({ 'data.email': this.getEmail()});
+            const user = await dbMG.getClient().db(dbname).collection('users').findOne({email: this.getEmail()});
             if (user) {
-                const result = await this.comparePassword(this.getPassword(), user.data.password);
+                const result = await this.comparePassword(this.getPassword(), user.password);
                 if (result) {
                     return user;
                 }

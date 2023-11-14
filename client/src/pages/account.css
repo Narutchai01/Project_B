@@ -1,0 +1,43 @@
+.account{
+    background-color: #7091F5;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container-account {
+    padding: 60px;
+    margin: 0 auto;
+}
+.contant-account {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.account-header{
+    display: flex;
+    justify-content: space-between;
+}
+.header-right{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.icon-user{
+    font-size: 30px;
+    color: #7091F5;
+    margin-right: 10px;
+    border: 2px solid black;
+    padding: 7px;
+    border-radius: 50%;
+}
+.dataUser{
+    display: flex;
+    justify-content: space-between;
+    width: 65vw;
+}
+.win-zone{
+    display : flex;
+    justify-content: space-between;
+    width: 40vw;
+}

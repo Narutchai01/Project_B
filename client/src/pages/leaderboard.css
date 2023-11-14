@@ -1,0 +1,35 @@
+.leaderboard {
+    height: 100vh;
+    width: 100vw;
+    background-color: #7091F5;
+}
+
+.container-leaderboard {
+    padding: 60px;
+    margin: 0 auto;
+}
+.contant{
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white;
+}
+.difficulty {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+.tablescore {
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+table{
+    width: 100%;
+}
+tbody{
+    text-align: center;
+}

@@ -14,23 +14,23 @@ import { runFuncOnCells } from '../util/Init'
 //BUTTON-----------------------------------------------------------------
 
 const Button = ({ position, GameData, SideProp }) => {
-    let cord = []
-    cord[SideProp.fixedCord[0]] = SideProp.fixedCord[1]
-    cord[SideProp.pCord[0]] = position[0] * SideProp.flippedCord[SideProp.pCord[0]]
-    cord[SideProp.pCord[1]] = position[1] * SideProp.flippedCord[SideProp.pCord[1]]
-    let name = cord.toString()
-    let thisCell = GameData.dict.get(name)
+  let cord = []
+  cord[SideProp.fixedCord[0]] = SideProp.fixedCord[1]
+  cord[SideProp.pCord[0]] = position[0] * SideProp.flippedCord[SideProp.pCord[0]]
+  cord[SideProp.pCord[1]] = position[1] * SideProp.flippedCord[SideProp.pCord[1]]
+  let name = cord.toString()
+  let thisCell = GameData.dict.get(name)
 
-    let revealPosition = [position[0], position[1], position[2] - 0.05]
-    let [flagged, setFlag] = useState(false)
-    let isMined = thisCell.isMined
+  let revealPosition = [position[0], position[1], position[2] - 0.05]
+  let [flagged, setFlag] = useState(false)
+  let isMined = thisCell.isMined
 
 
-    const revealAllMines = () => {
-        GameData.dict.forEach((cell, name) => {
-            if (cell.isMined) GameData.setReveal(name)
-            GameData.dict.get(name).isRevealed = true
-        })
+  const revealAllMines = () => {
+    GameData.dict.forEach((cell, name) => {
+      if (cell.isMined) GameData.setReveal(name)
+        GameData.dict.get(name).isRevealed = true
+      })
     }
 
     const revealCells = (cord) => {

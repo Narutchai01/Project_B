@@ -1,0 +1,12 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 64px;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+}

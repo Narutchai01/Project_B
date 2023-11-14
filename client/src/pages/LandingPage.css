@@ -1,0 +1,98 @@
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+  overflow: hidden;
+  background-color: rgb(9, 4, 15);
+}
+
+.landingpage-main-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.landingpage-main-container .canvas {
+  width: 60vw;
+  height: 100vh;
+}
+
+.landingpage-main-container .expand-container {
+  width: 40vw;
+  height: 100vh;
+  animation: expand-container 1s;
+}
+
+@keyframes expand-container {
+  0% {width: 0vw;}
+  100% {width: 40vw;}
+}
+
+.landingpage-main-container .collapse-container {
+  width: 0vw;
+  height: 100vh;
+  animation: collapse-container 1s;
+  display: hidden;
+}
+
+@keyframes collapse-container {
+  0% {
+    width: 40vw;
+  }
+  100% {
+    width: 0vw;
+  }
+}
+
+.disable {
+  position: absolute;
+  top: -200%;
+}
+
+
+.login-form, .sign-up-form {
+  width: 40vw;
+  height: 100vh;
+  background-color: lightsteelblue;
+}
+
+.login-in {
+  animation: expanding-right 1s;
+}
+
+.sign-up-in {
+  animation: expanding-left 1s;
+}
+
+.login-out {
+  animation: collapsing-right 1s;
+  transform: translateX(10vw);
+}
+
+.sign-up-out {
+  animation: collapsing-left 1s;
+  transform: translateX(-50vw);
+}
+
+@keyframes expanding-right {
+  0% {transform: translateX(10vw);}
+  100% {transform: translateX(0);}
+}
+@keyframes collapsing-right {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(10vw);}
+}
+@keyframes expanding-left {
+  0% {transform: translateX(-50vw);}
+  100% {transform: translateX(0);}
+}
+@keyframes collapsing-left {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(-50vw);}
+}
+
+
+
+
