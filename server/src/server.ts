@@ -48,7 +48,7 @@ app.post('/api/register', async (req, res) => {
             return false;
         }
         await dbMG.getClient().db(dbname).collection('users').insertOne(result);
-        dbMG.getClose();
+        // dbMG.getClose();
         res.status(200).send(result);
     }
     catch (err) {
@@ -93,7 +93,6 @@ app.get('/api/logout', auth, async (req, res) => {
 app.get('/api/users', async (req, res) => {
     try {
         const users = await dbMG.getClient().db(dbname).collection('users').find().toArray();
-        dbMG.getClose();
         res.status(200).send(users);
     }
     catch (err) {
@@ -104,7 +103,6 @@ app.get('/api/users', async (req, res) => {
 app.get('/api/showscore', async (req, res) => {
     try {
         const result = await dbMG.getClient().db(dbname).collection('records').find().toArray();
-        // dbMG.getClose();
         if (!result) {
             res.status(400).send('bad request');
             return false;
@@ -121,7 +119,6 @@ app.get('/api/:username', async (req, res) => {
         const user = await dbMG.getClient().db(dbname).collection('users').findOne({
             username: username
         });
-        dbMG.getClose();
         if (!user) {
             res.status(404).send('user not found');
             return false;
