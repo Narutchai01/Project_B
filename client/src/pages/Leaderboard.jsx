@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import TableLeader from '../components/TableLeader'
+import Pagination from '../components/Pagination'
 
 const Leaderboard = () => {
 
@@ -11,6 +12,13 @@ const Leaderboard = () => {
     const scoreURL = `http://localhost:8080/api/showscore/${mode}`
 
     const [score, setScore] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(8)
+    const indexOfLastPost = currentPage * postPerPage
+    const indexOfFirstPost = indexOfLastPost - postPerPage
+    const currentPost = score.slice(indexOfFirstPost, indexOfLastPost)
+    const pagination = (pageNumber) => setCurrentPage(pageNumber)
+
 
 
 
@@ -68,7 +76,8 @@ const Leaderboard = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <TableLeader score={score} />
+                                    <TableLeader score={currentPost} />
+                                    <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                                 </tbody>
                             </table>
                         </div>

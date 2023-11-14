@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import TableAcc from '../components/TableAcc'
+import Pagination from '../components/Pagination'
 
 const Account = () => {
 
     const [user, setUser] = useState([])
     const {username,mode} = useParams()
     const [score, setScore] = useState([])
+
+    
 
     const userURL = `http://localhost:8080/api/${username}`
     const scoreURL = `http://localhost:8080/api/showscore/${username}/${mode}`
@@ -32,9 +35,16 @@ const Account = () => {
         getUser()
     }, [userURL,scoreURL])
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(5)
+    const indexOfLastPost = currentPage * postPerPage
+    const indexOfFirstPost = indexOfLastPost - postPerPage
+    const currentPost = score.slice(indexOfFirstPost, indexOfLastPost)
+
+    const pagination = (pageNumber) => setCurrentPage(pageNumber)
+
 
     // console.log(user);
-    console.log(score);
 
     return (
         <>
@@ -76,7 +86,8 @@ const Account = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <TableAcc score={score}/>
+                                    <TableAcc score={currentPost}/>
+                                    <Pagination postPerPage={currentPost} totalPosts={score.length} paginate={pagination}/>
                                 </tbody>
                             </table>
                         </div>

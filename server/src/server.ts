@@ -32,7 +32,7 @@ app.use(cookieParser());
 // app.use(cors(header));
 
 // connect to db
-dbMG.connectTODB();
+// dbMG.connectTODB();
 
 
 
@@ -48,7 +48,6 @@ app.post('/api/register', async (req, res) => {
             return false;
         }
         await dbMG.getClient().db(dbname).collection('users').insertOne(result);
-        // dbMG.getClose();
         res.status(200).send(result);
     }
     catch (err) {
