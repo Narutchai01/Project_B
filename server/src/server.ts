@@ -1,9 +1,7 @@
-import { Result } from './../../client/node_modules/postcss-load-config/src/index.d';
 // import 
 import LoginController from './controller/LoginController';
 const cors = require('cors');
 import express, { response, request, NextFunction } from 'express';
-const bcrypt = require('bcrypt');
 import { config } from './config';
 import { json } from 'body-parser';
 const cookieParser = require('cookie-parser');
@@ -11,7 +9,8 @@ const jwt = require('jsonwebtoken');
 import { dbMG } from './controller/DatabaseMG';
 import RegisterController from './controller/RegisterController';
 import { auth } from './middleware/auth';
-import User from './controller/User';
+import RecordsController from './controller/RecordsConTroller';
+
 
 
 //define
@@ -37,6 +36,7 @@ dbMG.connectTODB();
 
 
 
+
 // routes
 app.post('/api/register', async (req, res) => {
     try {
@@ -47,7 +47,8 @@ app.post('/api/register', async (req, res) => {
             res.status(400).send('bad request');
             return false;
         }
-        await dbMG.getClient().db(dbname).collection('users').insertOne(Result);
+        await dbMG.getClient().db(dbname).collection('users').insertOne(result);
+        dbMG.getClose();
         res.status(200).send(result);
     }
     catch (err) {
@@ -89,23 +90,102 @@ app.get('/api/logout', auth, async (req, res) => {
     }
 });
 
+app.get('/api/users', async (req, res) => {
+    try {
+        const users = await dbMG.getClient().db(dbname).collection('users').find().toArray();
+        dbMG.getClose();
+        res.status(200).send(users);
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
 
-app.get('/api/:id',async (req, res) => {
-    const username = req.params.id;
-    try{
+app.get('/api/showscore', async (req, res) => {
+    try {
+        const result = await dbMG.getClient().db(dbname).collection('records').find().toArray();
+        // dbMG.getClose();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/api/:username', async (req, res) => {
+    const username = req.params.username;
+    try {
         const user = await dbMG.getClient().db(dbname).collection('users').findOne({
-            username: username     
+            username: username
         });
-        if(!user){
+        dbMG.getClose();
+        if (!user) {
             res.status(404).send('user not found');
             return false;
         }
         res.status(200).send(user);
     }
-    catch(err){
+    catch (err) {
         console.log(err);
+        dbMG.connectTODB();
     }
 });
+
+app.post('/api/records', async (req, res) => {
+    try {
+        const { username, gameMode, time } = req.body;
+        const recordsController = new RecordsController(gameMode, username, time);
+        if (!recordsController) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        const result = await dbMG.getClient().db(dbname).collection('records').insertOne(recordsController);
+        res.status(200).send(result);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+});
+
+app.get('/api/showscore/:mode', async (req, res) => {
+    try {
+
+        const mode = req.params.mode;
+        const result = await dbMG.getClient().db(dbname).collection('records').find({ gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    } catch (error) {
+
+        console.log(error);
+
+    }
+});
+
+app.get('/api/showscore/:username/:mode', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const mode = req.params.mode;
+        const result = await dbMG.getClient().db(dbname).collection('records').find({ username: username, gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    } catch (error) {
+        console.log(error);
+
+    }
+});
+
+
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);
