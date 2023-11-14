@@ -50,9 +50,14 @@ app.post('/api/register', (req, res) => __awaiter(void 0, void 0, void 0, functi
             res.status(400).send('bad request');
             return false;
         }
+<<<<<<< Updated upstream
         yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne({
             data: result,
         });
+=======
+        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne(result);
+        // dbMG.getClose();
+>>>>>>> Stashed changes
         res.status(200).send(result);
     }
     catch (err) {
@@ -90,8 +95,35 @@ app.get('/api/logout', auth_1.auth, (req, res) => __awaiter(void 0, void 0, void
         console.log(err);
     }
 }));
+<<<<<<< Updated upstream
 app.get('/api/:user', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.params.user;
+=======
+app.get('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').find().toArray();
+        res.status(200).send(users);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}));
+app.get('/api/showscore', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find().toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}));
+app.get('/api/:username', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.params.username;
+>>>>>>> Stashed changes
     try {
         const user = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').findOne({
             'data.username': username,
