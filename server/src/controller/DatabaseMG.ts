@@ -23,9 +23,14 @@ class DatabaseMG {
     getClient(){
         return this.client;
     }
+<<<<<<< Updated upstream
     getClose(){
         this.client.close();
     }
+=======
+        
+    
+>>>>>>> Stashed changes
 }
 
 

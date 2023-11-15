@@ -51,6 +51,7 @@ app.post('/api/register', async (req, res) => {
         res.status(200).send(result);
     }
     catch (err) {
+        dbMG.connectTODB();
         console.log(err);
     }
 });
@@ -70,6 +71,7 @@ app.post('/api/login', async (req, res) => {
         }
     }
     catch (err) {
+        dbMG.connectTODB();
         console.log(err);
     }
 });
@@ -85,14 +87,46 @@ app.get('/api/logout', auth, async (req, res) => {
         res.status(200).send('logout');
     }
     catch (err) {
+        dbMG.connectTODB();
         console.log(err);
     }
 });
 
+<<<<<<< Updated upstream
 
 app.get('/api/:user',async (req, res) => {
     const username = req.params.user;
     try{
+=======
+app.get('/api/users', async (req, res) => {
+    try {
+        const users = await dbMG.getClient().db(dbname).collection('users').find().toArray();
+        res.status(200).send(users);
+    }
+    catch (err) {
+        dbMG.connectTODB();
+        console.log(err);
+    }
+});
+
+app.get('/api/showscore', async (req, res) => {
+    try {
+        const result = await dbMG.getClient().db(dbname).collection('records').find().toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    } catch (error) {
+        dbMG.connectTODB();
+        console.log(error);
+    }
+});
+
+app.get('/api/:username', async (req, res) => {
+    const username = req.params.username;
+    try {
+>>>>>>> Stashed changes
         const user = await dbMG.getClient().db(dbname).collection('users').findOne({
             'data.username': username,        });
         if(!user){
@@ -106,6 +140,64 @@ app.get('/api/:user',async (req, res) => {
     }
 });
 
+<<<<<<< Updated upstream
+=======
+app.post('/api/records', async (req, res) => {
+    try {
+        const { username, gameMode, time } = req.body;
+        const recordsController = new RecordsController(gameMode, username, time);
+        if (!recordsController) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        const result = await dbMG.getClient().db(dbname).collection('records').insertOne(recordsController);
+        res.status(200).send(result);
+
+    } catch (error) {
+
+        dbMG.connectTODB();
+        console.log(error);
+
+    }
+});
+
+app.get('/api/showscore/:mode', async (req, res) => {
+    try {
+
+        const mode = req.params.mode;
+        const result = await dbMG.getClient().db(dbname).collection('records').find({ gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    } catch (error) {
+        dbMG.connectTODB();
+        console.log(error);
+
+    }
+});
+
+app.get('/api/showscore/:username/:mode', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const mode = req.params.mode;
+        const result = await dbMG.getClient().db(dbname).collection('records').find({ username: username, gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    } catch (error) {
+        dbMG.connectTODB();
+        console.log(error);
+
+    }
+});
+
+
+
+>>>>>>> Stashed changes
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);
 });
