@@ -2,27 +2,48 @@
     background-color: #7091F5;
     height: 100vh;
     width: 100vw;
+    font-family: 'Mitr',  sans-serif;
+    display: flex;
+    align-items: center;
 }
 
 .container-account {
-    padding: 60px;
-    margin: 0 auto;
+    padding: 20px 50px;
+    height: 100%;
+    width: 100%;
 }
+
 .contant-account {
     background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 20px 50px 10px 50px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
 }
+
 .account-header{
     display: flex;
     justify-content: space-between;
+    font-size: 18px;
 }
+
+.back2homepage-btn{
+    font-size: 30px;
+    color: #7091F5;
+    cursor: pointer;
+    padding: 10px;
+}
+
 .header-right{
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .icon-user{
     font-size: 30px;
     color: #7091F5;
@@ -31,6 +52,15 @@
     padding: 7px;
     border-radius: 50%;
 }
+
+.userinfo {
+    font-size: 18px;
+    padding: 20px;
+    padding-left: 10px;
+    font-weight: 400;
+
+}
+
 .dataUser{
     display: flex;
     justify-content: space-between;
@@ -41,8 +71,32 @@
     justify-content: space-between;
     width: 40vw;
 }
-.back2homepage-btn{
-    font-size: 30px;
-    color: #7091F5;
-    cursor: pointer;
+
+
+.acctable {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+
+.accountrow td {
+    padding: 3px 0px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;
+    gap: 10px;
+    padding-left: 30px;
+}
+
+.pagination button {
+    border-radius: 15px;
+    background-color: #7091F5;
+    padding: 3px 10px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
 }

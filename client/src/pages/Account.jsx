@@ -81,47 +81,47 @@ const Account = () => {
                                 <h1>high Score: 0 </h1>
                             </div>
                         </div>
-                        <div className="difficulty">
-                            <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                                <button>
-                                    <NavLink to={`/account/${username}/beginner`}>
-                                        Beginner
-                                    </NavLink>
-                                </button>
+                        <div className='acctable'>    
+                            <div className="difficulty">
+                                <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                    <button>
+                                        <NavLink to={`/account/${username}/beginner`}>
+                                            Beginner
+                                        </NavLink>
+                                    </button>
+                                </div>
+                                <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                    <button>
+                                        <NavLink to={`/account/${username}/intermediate`}>
+                                            Intermediate
+                                        </NavLink>
+                                    </button>
+                                </div>
+                                <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                    <button>
+                                        <NavLink to={`/account/${username}/expert`}>
+                                            Expert
+                                        </NavLink>
+                                    </button>
+                                </div>
                             </div>
-                            <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                                <button>
-                                    <NavLink to={`/account/${username}/intermediate`}>
-                                        Intermediate
-                                    </NavLink>
-                                </button>
-                            </div>
-                            <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                                <button>
-                                    <NavLink to={`/account/${username}/expert`}>
-                                        Intermediate
-
-                                        Expert
-                                    </NavLink>
-                                </button>
-                            </div>
+                            <div className="tablescore"> 
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className='right'>Rank</th>
+                                            <th className='right'>Name</th>
+                                            <th className='right'>score</th>
+                                            <th>date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <TableAcc score={currentPost}/>
+                                    </tbody>
+                                </table>
+                            </div>    
+                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                         </div>
-                        <div className="tablescore">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>score</th>
-                                        <th>date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <TableAcc score={currentPost} />
-                                </tbody>
-                            </table>
-                        </div>
-                        <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage} />
                     </div>
                 </div>
             </div>
