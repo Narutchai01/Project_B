@@ -33,7 +33,8 @@ const Leaderboard = () => {
     }, [scoreURL])
 
 
-    console.log(score);
+    // console.log(score);
+    console.log(currentPage);
 
     return (
         <>
@@ -41,8 +42,29 @@ const Leaderboard = () => {
                 <div className='container-leaderboard'>
                     <div className='content'>
                         <div className="title">
-                            <div className='Return logo'>
-                                <IoArrowUndoSharp className='ReturnLeaderboard'/>
+                            <h1>Leaderboard</h1>
+                        </div>
+                        <div className="difficulty">
+                            <div className={mode === 'beginner'? 'difficulty-btn-active' : 'difficulty-btn'  }>
+                                <button>
+                                    <NavLink to={`/leaderboard/beginner`}>
+                                        Beginner
+                                    </NavLink>
+                                </button>
+                            </div>
+                            <div className={mode === 'intermediate'? 'difficulty-btn-active' : 'difficulty-btn'  }>
+                                <button>
+                                    <NavLink to={`/leaderboard/intermediate`}>
+                                        Intermediate
+                                    </NavLink>
+                                </button>
+                            </div>
+                            <div className={mode === 'expert'? 'difficulty-btn-active' : 'difficulty-btn'  }>
+                                <button>
+                                    <NavLink to={`/leaderboard/expert`}>
+                                        Expert
+                                    </NavLink>
+                                </button>
                             </div>
                             <h1 className='Maintitle'>
                                 Leaderboard
@@ -89,6 +111,7 @@ const Leaderboard = () => {
                             </div>
                             <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                         </div>
+                    <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage}/>
                     </div>
                 </div>
             </div>
