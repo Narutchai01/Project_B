@@ -1,4 +1,5 @@
 import './account.css'
+import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { IoArrowUndoSharp } from 'react-icons/io5'
 import { BiSolidUser } from 'react-icons/bi'
@@ -37,7 +38,7 @@ const Account = () => {
     }, [userURL, scoreURL])
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [postPerPage] = useState(5)
+    const [postPerPage] = useState(8)
     const indexOfLastPost = currentPage * postPerPage
     const indexOfFirstPost = indexOfLastPost - postPerPage
     const currentPost = score.slice(indexOfFirstPost, indexOfLastPost)
@@ -53,7 +54,7 @@ const Account = () => {
                 <div className="container-account">
                     <div className="contant-account">
                         <div className="account-header">
-                            <h1>
+                            <h1 className='back2homepage-btn'>
                                 <Link to={`/Homepage/${username}`}>
                                     <IoArrowUndoSharp />
                                 </Link>
@@ -80,6 +81,31 @@ const Account = () => {
                                 <h1>high Score: 0 </h1>
                             </div>
                         </div>
+                        <div className="difficulty">
+                            <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                <button>
+                                    <NavLink to={`/account/${username}/beginner`}>
+                                        Beginner
+                                    </NavLink>
+                                </button>
+                            </div>
+                            <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                <button>
+                                    <NavLink to={`/account/${username}/intermediate`}>
+                                        Intermediate
+                                    </NavLink>
+                                </button>
+                            </div>
+                            <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                <button>
+                                    <NavLink to={`/account/${username}/expert`}>
+                                        Intermediate
+
+                                        Expert
+                                    </NavLink>
+                                </button>
+                            </div>
+                        </div>
                         <div className="tablescore">
                             <table>
                                 <thead>
@@ -95,7 +121,7 @@ const Account = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} />
+                        <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage} />
                     </div>
                 </div>
             </div>
