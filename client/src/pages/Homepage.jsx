@@ -74,7 +74,7 @@ const Homepage = () => {
                     <Cube />
                 </Canvas>
             </div>
-            <div className="Difficulty">
+            <div className="Difficulty" id='HomepageDiff'>
                 <h1>
                     Beginner
                 </h1>
