@@ -8,15 +8,15 @@
 }
 
 .container-account {
-    padding: 20px;
+    padding: 20px 50px;
     height: 100%;
     width: 100%;
 }
 
 .contant-account {
     background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 20px 50px 10px 50px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     height: 100%;
     width: 100%;
@@ -35,7 +35,7 @@
     font-size: 30px;
     color: #7091F5;
     cursor: pointer;
-    padding-left: 20px;
+    padding: 10px;
 }
 
 .header-right{
@@ -55,7 +55,8 @@
 
 .userinfo {
     font-size: 18px;
-    padding-left: 20px;
+    padding: 20px;
+    padding-left: 10px;
     font-weight: 400;
 
 }
@@ -73,7 +74,10 @@
 
 
 .acctable {
-    height: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
 }
 
 
@@ -86,7 +90,7 @@
     flex-direction: row;
     padding-bottom: 15px;
     gap: 10px;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .pagination button {

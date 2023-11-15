@@ -1,5 +1,6 @@
 import './leaderboard.css'
 import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -42,76 +43,54 @@ const Leaderboard = () => {
                 <div className='container-leaderboard'>
                     <div className='content'>
                         <div className="title">
-                            <h1>Leaderboard</h1>
-                        </div>
-                        <div className="difficulty">
-                            <div className={mode === 'beginner'? 'difficulty-btn-active' : 'difficulty-btn'  }>
-                                <button>
-                                    <NavLink to={`/leaderboard/beginner`}>
-                                        Beginner
-                                    </NavLink>
-                                </button>
-                            </div>
-                            <div className={mode === 'intermediate'? 'difficulty-btn-active' : 'difficulty-btn'  }>
-                                <button>
-                                    <NavLink to={`/leaderboard/intermediate`}>
-                                        Intermediate
-                                    </NavLink>
-                                </button>
-                            </div>
-                            <div className={mode === 'expert'? 'difficulty-btn-active' : 'difficulty-btn'  }>
-                                <button>
-                                    <NavLink to={`/leaderboard/expert`}>
-                                        Expert
-                                    </NavLink>
-                                </button>
-                            </div>
-                            <h1 className='Maintitle'>
-                                Leaderboard
+                            <h1 className='Returnbtn'> 
+                                <IoArrowUndoSharp />                                   
                             </h1>
+                            <div className='Maintitle'>
+                                <h1>Leaderboard</h1>
+                            </div>
                         </div>
-                        <div className='leadertable'>    
+                        <div className='leadertable'> 
                             <div className="difficulty">
-                                <div className="difficulty-btn">
+                                <div className={mode === 'beginner'? 'difficulty-btn-active' : 'difficulty-btn'  }>
                                     <button>
                                         <NavLink to={`/leaderboard/beginner`}>
                                             Beginner
                                         </NavLink>
                                     </button>
                                 </div>
-                                <div className="difficulty-btn">
+                                <div className={mode === 'intermediate'? 'difficulty-btn-active' : 'difficulty-btn'  }>
                                     <button>
                                         <NavLink to={`/leaderboard/intermediate`}>
                                             Intermediate
                                         </NavLink>
                                     </button>
                                 </div>
-                                <div className="difficulty-btn">
+                                <div className={mode === 'expert'? 'difficulty-btn-active' : 'difficulty-btn'  }>
                                     <button>
                                         <NavLink to={`/leaderboard/expert`}>
                                             Expert
                                         </NavLink>
                                     </button>
                                 </div>
+                            </div>   
+                                <div className="tablescore">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th className='right'>Rank</th>
+                                                <th className='right'>Name</th>
+                                                <th className='right'>Time</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='row'>
+                                            <TableLeader score={currentPost} />
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage}/>
                             </div>
-                            <div className="tablescore">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th className='right'>Rank</th>
-                                            <th className='right'>Name</th>
-                                            <th className='right'>Time</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className='row'>
-                                        <TableLeader score={currentPost} />
-                                    </tbody>
-                                </table>
-                            </div>
-                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
-                        </div>
-                    <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage}/>
                     </div>
                 </div>
             </div>

@@ -120,7 +120,7 @@ const Account = () => {
                                     </tbody>
                                 </table>
                             </div>    
-                            <Pagination postPerPage={currentPost} totalPosts={score.length} paginate={pagination}/>
+                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                         </div>
                     </div>
                 </div>
