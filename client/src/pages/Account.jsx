@@ -1,4 +1,5 @@
 import './account.css'
+import { Link } from 'react-router-dom'
 import { IoArrowUndoSharp } from 'react-icons/io5'
 import { BiSolidUser } from 'react-icons/bi'
 import { useEffect, useState } from 'react'
@@ -10,10 +11,10 @@ import Pagination from '../components/Pagination'
 const Account = () => {
 
     const [user, setUser] = useState([])
-    const {username,mode} = useParams()
+    const { username, mode } = useParams()
     const [score, setScore] = useState([])
 
-    
+
 
     const userURL = `http://localhost:8080/api/${username}`
     const scoreURL = `http://localhost:8080/api/showscore/${username}/${mode}`
@@ -33,7 +34,7 @@ const Account = () => {
         getScoreByUser()
 
         getUser()
-    }, [userURL,scoreURL])
+    }, [userURL, scoreURL])
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postPerPage] = useState(5)
@@ -52,7 +53,11 @@ const Account = () => {
                 <div className="container-account">
                     <div className="contant-account">
                         <div className="account-header">
-                            <h1><IoArrowUndoSharp /></h1>
+                            <h1>
+                                <Link to={`/Homepage/${username}`}>
+                                    <IoArrowUndoSharp />
+                                </Link>
+                            </h1>
                             <div className='header-right'>
                                 <h1>{user.username}</h1>
                                 <div className='icon-user'>
@@ -86,11 +91,11 @@ const Account = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <TableAcc score={currentPost}/>
-                                    <Pagination postPerPage={currentPost} totalPosts={score.length} paginate={pagination}/>
+                                    <TableAcc score={currentPost} />
                                 </tbody>
                             </table>
                         </div>
+                        <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} />
                     </div>
                 </div>
             </div>

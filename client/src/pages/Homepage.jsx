@@ -1,4 +1,6 @@
 import axios from "axios"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
@@ -10,8 +12,9 @@ import './Homepage.css';
 
 
 const Cube = () => {
-    
-    const [LeaderboardHover , setLeaderboardhover] = useState(false)
+
+    const navigate = useNavigate()
+    const [LeaderboardHover, setLeaderboardhover] = useState(false)
 
 
     return (
@@ -23,23 +26,23 @@ const Cube = () => {
             <mesh>
                 <boxGeometry attach={'geometry'} args={[2, 2, 2]} />
                 <meshStandardMaterial attach={'material'} color={'white'} />
-            <Text
-                color={LeaderboardHover ? 'black':'white'}
-                position={[0.1 ,1.01, 0.1]} scale={[0.4, 0.4, 0.4]}
-                rotation={[-1.57 , 0 , 0.784]}
-                onPointerEnter={() => {setLeaderboardhover(true)}}
-                onPointerLeave={() => {setLeaderboardhover(false)}}>
-                Leaderboard
-            </Text>
-        
+                <Text onClick={() => { navigate('/leaderboard/ez') }}
+                    color={LeaderboardHover ? 'black' : 'white'}
+                    position={[0.1, 1.01, 0.1]} scale={[0.4, 0.4, 0.4]}
+                    rotation={[-1.57, 0, 0.784]}
+                    onPointerEnter={() => { setLeaderboardhover(true) }}
+                    onPointerLeave={() => { setLeaderboardhover(false) }}>
+                    Leaderboard
+                </Text>
+
             </mesh>
         </mesh>
-        )
-    }
+    )
+}
 
 const Homepage = () => {
 
-    const {username} = useParams()
+    const { username } = useParams()
     const [User, setUser] = useState({})
 
     const getUser = async () => {
@@ -59,34 +62,33 @@ const Homepage = () => {
         getUser()
     })
 
-    
+
     return (
         <>
-        <div className="HomePage">
-            <div className="Account" >
-                <a href="/account/:username/:mode"> 
-                    <HiMiniUserCircle className="AccountPic"/>
-                </a>
-                
+            <div className="HomePage">
+                <div className="Account" >
+                    <Link to={`/account/${username}/inter`}>
+                        <h1><HiMiniUserCircle className="AccountPic" /></h1>
+                    </Link>
+                </div>
+                <div className="Box">
+                    <Canvas>
+                        <Cube />
+                    </Canvas>
+                </div>
+                <div className="Difficulty">
+                    <h1>
+                        Beginner
+                    </h1>
+                    <h1>
+                        Intermediate
+                    </h1>
+                    <h1>
+                        Expert
+                    </h1>
+                </div>
+                <hr className="Line"></hr>
             </div>
-            <div className="Box">
-                <Canvas>
-                    <Cube />
-                </Canvas>
-            </div>
-            <div className="Difficulty">
-                <h1>
-                    Beginner
-                </h1>
-                <h1>
-                    Intermediate
-                </h1>
-                <h1>
-                    Expert
-                </h1>
-            </div>
-            <hr className="Line"></hr>
-        </div>
 
         </>
     )
