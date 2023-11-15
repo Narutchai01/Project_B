@@ -7,8 +7,6 @@
     align-items: center;
 }
 
-
-
 .container-account {
     padding: 20px;
     height: 100%;
@@ -22,12 +20,9 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     height: 100%;
     width: 100%;
-}
-
-.allcontent {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: space-evenly; */
 }
 
 .account-header{
@@ -36,11 +31,11 @@
     font-size: 18px;
 }
 
-.ReturnAccount {
-    width: 2rem;
-    height: 2rem;
-    margin-left: 20px;
+.back2homepage-btn{
+    font-size: 30px;
     color: #7091F5;
+    cursor: pointer;
+    padding-left: 20px;
 }
 
 .header-right{
@@ -76,15 +71,28 @@
     width: 40vw;
 }
 
+
 .acctable {
-    display: flex;
-    flex-direction: column;
+    height: 40%;
 }
 
-.tablescore {
-    height: 100%;
-}
 
 .accountrow td {
     padding: 3px 0px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+.pagination button {
+    border-radius: 15px;
+    background-color: #7091F5;
+    padding: 3px 10px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
 }

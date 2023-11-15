@@ -54,7 +54,11 @@ const Account = () => {
                 <div className="container-account">
                     <div className="contant-account">
                         <div className="account-header">
-                            <h1><IoArrowUndoSharp /></h1>
+                            <h1 className='back2homepage-btn'>
+                                <Link to={`/Homepage/${username}`}>
+                                    <IoArrowUndoSharp />
+                                </Link>
+                            </h1>
                             <div className='header-right'>
                                 <h1>{user.username}</h1>
                                 <div className='icon-user'>
@@ -77,21 +81,46 @@ const Account = () => {
                                 <h1>high Score: 0 </h1>
                             </div>
                         </div>
-                        <div className="tablescore">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>score</th>
-                                        <th>date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <TableAcc score={currentPost}/>
-                                    <Pagination postPerPage={currentPost} totalPosts={score.length} paginate={pagination}/>
-                                </tbody>
-                            </table>
+                        <div className='acctable'>    
+                            <div className="difficulty">
+                                <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                    <button>
+                                        <NavLink to={`/account/${username}/beginner`}>
+                                            Beginner
+                                        </NavLink>
+                                    </button>
+                                </div>
+                                <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                    <button>
+                                        <NavLink to={`/account/${username}/intermediate`}>
+                                            Intermediate
+                                        </NavLink>
+                                    </button>
+                                </div>
+                                <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
+                                    <button>
+                                        <NavLink to={`/account/${username}/expert`}>
+                                            Expert
+                                        </NavLink>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="tablescore"> 
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className='right'>Rank</th>
+                                            <th className='right'>Name</th>
+                                            <th className='right'>score</th>
+                                            <th>date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <TableAcc score={currentPost}/>
+                                    </tbody>
+                                </table>
+                            </div>    
+                            <Pagination postPerPage={currentPost} totalPosts={score.length} paginate={pagination}/>
                         </div>
                     </div>
                 </div>

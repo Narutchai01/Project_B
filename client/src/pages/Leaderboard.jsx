@@ -39,7 +39,7 @@ const Leaderboard = () => {
         <>
             <div className='leaderboard'>
                 <div className='container-leaderboard'>
-                    <div className='contant'>
+                    <div className='content'>
                         <div className="title">
                             <div className='Return logo'>
                                 <IoArrowUndoSharp className='ReturnLeaderboard'/>
