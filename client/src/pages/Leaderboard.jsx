@@ -45,21 +45,21 @@ const Leaderboard = () => {
                         <div className="difficulty">
                             <div className="difficulty-btn">
                                 <button>
-                                    <NavLink to={`/leaderboard/ez`}>
-                                        Easy
+                                    <NavLink to={`/leaderboard/Beginner`}>
+                                        Beginner
                                     </NavLink>
                                 </button>
                             </div>
                             <div className="difficulty-btn">
                                 <button>
-                                    <NavLink to={`/leaderboard/inter`}>
-                                        Inter
+                                    <NavLink to={`/leaderboard/Intermediate`}>
+                                        Intermediate
                                     </NavLink>
                                 </button>
                             </div>
                             <div className="difficulty-btn">
                                 <button>
-                                    <NavLink to={`/leaderboard/expert`}>
+                                    <NavLink to={`/leaderboard/Expert`}>
                                         Expert
                                     </NavLink>
                                 </button>
@@ -69,18 +69,18 @@ const Leaderboard = () => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>score</th>
-                                        <th>date</th>
+                                        <th className='right'>Rank</th>
+                                        <th className='right'>Name</th>
+                                        <th className='right'>Time</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <TableLeader score={currentPost} />
-                                    <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                                 </tbody>
                             </table>
                         </div>
+                        <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                     </div>
                 </div>
             </div>

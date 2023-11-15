@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300&display=swap');
 
+.Account {
+    color: #FFFF;
+}
 
-body {
+.HomePage {
+    position:absolute;
+    width: 100%;
+    height: 100%;
     background-color: #8AACFF;
 }
 
@@ -14,13 +20,15 @@ body {
     right: 2%;
     width: 5rem;
     height: 5rem;
-    color: #FFFF;
+    z-index: 1;
+    filter: drop-shadow(2px 2px 4px #b1b1b1);
 }
 
 .Box {
     position: absolute;
     width: 100%;
     height: 100%;
+    
 }
 
 .Difficulty {
@@ -34,9 +42,11 @@ body {
     gap: 20%;
 }
 
-.Difficulty h1 {
+#HomepageDiff h1 {
     font-family: 'mitr', sans-serif;
     font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
     color: #FFFF;
 }
 
