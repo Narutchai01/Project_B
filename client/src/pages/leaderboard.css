@@ -4,53 +4,84 @@
     background-color: #7091F5;
     font-family: 'mitr', sans-serif;
     font-style: normal;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
 }
 
 .container-leaderboard {
-    padding: 60px;
-    margin: 0 auto;
+    padding: 20px 60px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
     
 }
 .contant{
+    height: 100%;
+    width: 100%;
     border-radius: 20px;
     padding: 10px 50px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .title {
     text-align: center;
     font-size: 48px;
     text-shadow: 0px 4px 4px rgba(155, 155, 155, 0.3);
+    display: flex;
+    flex-direction: row;
+}
+
+.ReturnLeaderboard {
+    width: 2rem;
+    height: 2rem;
+    margin-top: 20px;
+    margin-left: auto;
+    color: #7091F5;
+}
+
+.Maintitle {
+    margin: auto;
+}
+
+.leadertable {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .difficulty {
     display: flex;
-    gap: 20px;
+    gap: 8px;
     justify-content: flex-end;
     padding-right: 10px;
-    font-size: 28px;
 }
 
 .difficulty-btn {
     border-radius: 50px;
     background-color: #7091F5;
-    padding: 3px 10px;
+    padding: 8px 16px;
     box-shadow: 1px 2px 4px 1px #c5c5c5;
     color: #FFFF;
 }
 
 .tablescore {
-    margin-top: 20px;
     border-radius: 20px;
     padding: 10px;
     background-color: white;
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 100%;
 }
+
 table{
     width: 100%;
+    height: 100%;
     padding-top: 40px;
     border-radius: 50px;
     box-shadow: 1px 2px 4px 1px #c5c5c5;
@@ -58,26 +89,20 @@ table{
 }
 
 thead {
-    font-size: 24px;
-    
-    
+    font-size: 18px;
 }
 
 thead tr  th{
     padding: 10px 0px;
-    
-
 }
 
 tbody{
     text-align: center;
-    font-size: 20px;
-    
-    
+
 }
 
 .tablerow td {
-    padding: 8px 0px;
+    padding: 15px 0px;
     
 }
 
@@ -102,18 +127,16 @@ tr td {
 }
 
 .pagination {
-    font-size: 18px;
     display: flex;
     flex-direction: row;
     gap: 2%;
-    margin-left: 10px;
-    margin-top: 8px;
+    padding-bottom: 10px;
 }
 
 .pagination button {
-    border-radius: 15px;
+    border-radius: 16px;
     background-color: #7091F5;
-    padding: 2px 8px;
+    padding: 2px 10px;
     box-shadow: 1px 2px 4px 1px #c5c5c5;
     color: #FFFF;
 }

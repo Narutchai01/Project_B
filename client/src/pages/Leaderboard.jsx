@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import TableLeader from '../components/TableLeader'
 import Pagination from '../components/Pagination'
+import { IoArrowUndoSharp } from 'react-icons/io5'
 
 const Leaderboard = () => {
 
@@ -40,47 +41,54 @@ const Leaderboard = () => {
                 <div className='container-leaderboard'>
                     <div className='contant'>
                         <div className="title">
-                            <h1>Leaderboard</h1>
-                        </div>
-                        <div className="difficulty">
-                            <div className="difficulty-btn">
-                                <button>
-                                    <NavLink to={`/leaderboard/Beginner`}>
-                                        Beginner
-                                    </NavLink>
-                                </button>
+                            <div className='Return logo'>
+                                <IoArrowUndoSharp className='ReturnLeaderboard'/>
                             </div>
-                            <div className="difficulty-btn">
-                                <button>
-                                    <NavLink to={`/leaderboard/Intermediate`}>
-                                        Intermediate
-                                    </NavLink>
-                                </button>
-                            </div>
-                            <div className="difficulty-btn">
-                                <button>
-                                    <NavLink to={`/leaderboard/Expert`}>
-                                        Expert
-                                    </NavLink>
-                                </button>
-                            </div>
+                            <h1 className='Maintitle'>
+                                Leaderboard
+                            </h1>
                         </div>
-                        <div className="tablescore">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className='right'>Rank</th>
-                                        <th className='right'>Name</th>
-                                        <th className='right'>Time</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <TableLeader score={currentPost} />
-                                </tbody>
-                            </table>
+                        <div className='leadertable'>    
+                            <div className="difficulty">
+                                <div className="difficulty-btn">
+                                    <button>
+                                        <NavLink to={`/leaderboard/beginner`}>
+                                            Beginner
+                                        </NavLink>
+                                    </button>
+                                </div>
+                                <div className="difficulty-btn">
+                                    <button>
+                                        <NavLink to={`/leaderboard/intermediate`}>
+                                            Intermediate
+                                        </NavLink>
+                                    </button>
+                                </div>
+                                <div className="difficulty-btn">
+                                    <button>
+                                        <NavLink to={`/leaderboard/expert`}>
+                                            Expert
+                                        </NavLink>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="tablescore">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className='right'>Rank</th>
+                                            <th className='right'>Name</th>
+                                            <th className='right'>Time</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className='row'>
+                                        <TableLeader score={currentPost} />
+                                    </tbody>
+                                </table>
+                            </div>
+                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                         </div>
-                        <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
                     </div>
                 </div>
             </div>

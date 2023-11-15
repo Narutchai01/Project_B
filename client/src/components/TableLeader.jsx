@@ -8,7 +8,7 @@ const TableLeader = ({score}) => {
                 <tr key={index} className="tablerow">
                     <td>{index + 1}</td>
                     <td>{item.username}</td>
-                    <td>{item.time}</td>
+                    <td >{item.time}</td>
                     <td className='noright'>{item.date}</td>
                 </tr>
             )
