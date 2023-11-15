@@ -31,7 +31,7 @@ const App = () => {
       {gameObj} */}
       <Routes>
         <Route path='/' element={<LandingPage/>} />
-        <Route path='/:username' element={<Homepage/>} />
+        <Route path='/Homepage/:username' element={<Homepage/>} />
         <Route path='/leaderboard/:mode' element={<Leaderboard/>} />
         <Route path='/account/:username/:mode' element={<Account/>} />
       </Routes>

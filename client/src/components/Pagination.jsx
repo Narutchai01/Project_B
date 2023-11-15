@@ -18,6 +18,8 @@ const Pagination = ({ postPerPage, totalPosts, paginate }) => {
                     </li>
                 ))}
             </ul>
+
+
         </>
     )
 }

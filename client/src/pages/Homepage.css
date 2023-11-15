@@ -12,7 +12,10 @@
 }
 
 .AccountPic {
+    z-index: 1;
     position: absolute;
+    display: flex;
+    justify-content: end;
     top: 3%;
     right: 2%;
     width: 5rem;

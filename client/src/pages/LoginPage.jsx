@@ -32,7 +32,7 @@ const LoginPage = () => {
         },
       }).then(res => {
         console.log(res.data);
-        navigate(`/${res.data.username}`)
+        navigate(`/Homepage/${res.data.username}`)
       }).catch(err => {
         console.log(err);
       })
