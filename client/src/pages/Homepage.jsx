@@ -67,7 +67,7 @@ const Homepage = () => {
         <>
             <div className="HomePage">
                 <div className="Account" >
-                    <Link to={`/account/${username}/inter`}>
+                    <Link to={`/account/${username}/ez`}>
                         <h1><HiMiniUserCircle className="AccountPic" /></h1>
                     </Link>
                 </div>

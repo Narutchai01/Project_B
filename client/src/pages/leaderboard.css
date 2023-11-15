@@ -39,7 +39,13 @@
     box-shadow: 1px 2px 4px 1px #c5c5c5;
     color: #FFFF;
 }
-
+.difficulty-btn-active {
+    border-radius: 50px;
+    background-color: #5254D8;
+    padding: 3px 10px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
 .tablescore {
     margin-top: 20px;
     border-radius: 20px;
@@ -110,7 +116,7 @@ tr td {
     margin-top: 8px;
 }
 
-.pagination button {
+.pageNumber-btn{
     border-radius: 15px;
     background-color: #7091F5;
     padding: 2px 8px;
@@ -118,4 +124,10 @@ tr td {
     color: #FFFF;
 }
 
-
+.pageNumber-btn-active{
+    border-radius: 15px;
+    background-color: #5254D8;
+    padding: 2px 8px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
