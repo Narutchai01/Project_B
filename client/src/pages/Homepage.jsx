@@ -15,7 +15,25 @@ const Cube = () => {
 
     const navigate = useNavigate()
     const [LeaderboardHover, setLeaderboardhover] = useState(false)
+    const { username } = useParams()
+    const [User, setUser] = useState({})
 
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/${username}`).then(res => {
+                setUser(res.data)
+            })
+            console.log(res.data);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    console.log(User);
+    useEffect(() => {
+        getUser()
+    })
 
     return (
         <mesh rotation={[0.8, -0.785, 0]}>
@@ -26,7 +44,7 @@ const Cube = () => {
             <mesh>
                 <boxGeometry attach={'geometry'} args={[2, 2, 2]} />
                 <meshStandardMaterial attach={'material'} color={'white'} />
-                <Text onClick={() => { navigate('/leaderboard/ez') }}
+                <Text onClick={() => { navigate(`/${username}/leaderboard/beginner`) }}
                     color={LeaderboardHover ? 'black' : 'white'}
                     position={[0.1, 1.01, 0.1]} scale={[0.4, 0.4, 0.4]}
                     rotation={[-1.57, 0, 0.784]}
@@ -67,7 +85,7 @@ const Homepage = () => {
         <>
             <div className="HomePage">
                 <div className="Account" >
-                    <Link to={`/account/${username}/ez`}>
+                    <Link to={`/account/${username}/beginner`}>
                         <h1><HiMiniUserCircle className="AccountPic" /></h1>
                     </Link>
                 </div>

@@ -1,6 +1,5 @@
 import './leaderboard.css'
 import { NavLink } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -10,7 +9,7 @@ import { IoArrowUndoSharp } from 'react-icons/io5'
 
 const Leaderboard = () => {
 
-    const { mode } = useParams()
+    const { username, mode } = useParams()
     const scoreURL = `http://localhost:8080/api/showscore/${mode}`
 
     const [score, setScore] = useState([])
@@ -35,7 +34,7 @@ const Leaderboard = () => {
 
 
     // console.log(score);
-    console.log(currentPage);
+    // console.log(currentPage);
 
     return (
         <>
@@ -43,54 +42,56 @@ const Leaderboard = () => {
                 <div className='container-leaderboard'>
                     <div className='content'>
                         <div className="title">
-                            <h1 className='Returnbtn'> 
-                                <IoArrowUndoSharp />                                   
+                            <h1 className='Returnbtn'>
+                                <NavLink to={`/Homepage/${username}`}>
+                                    <IoArrowUndoSharp />
+                                </NavLink>
                             </h1>
                             <div className='Maintitle'>
                                 <h1>Leaderboard</h1>
                             </div>
                         </div>
-                        <div className='leadertable'> 
+                        <div className='leadertable'>
                             <div className="difficulty">
-                                <div className={mode === 'beginner'? 'difficulty-btn-active' : 'difficulty-btn'  }>
+                                <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
                                     <button>
-                                        <NavLink to={`/leaderboard/beginner`}>
+                                        <NavLink to={`/${username}/leaderboard/beginner`}>
                                             Beginner
                                         </NavLink>
                                     </button>
                                 </div>
-                                <div className={mode === 'intermediate'? 'difficulty-btn-active' : 'difficulty-btn'  }>
+                                <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
                                     <button>
-                                        <NavLink to={`/leaderboard/intermediate`}>
+                                        <NavLink to={`/${username}/leaderboard/intermediate`}>
                                             Intermediate
                                         </NavLink>
                                     </button>
                                 </div>
-                                <div className={mode === 'expert'? 'difficulty-btn-active' : 'difficulty-btn'  }>
+                                <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
                                     <button>
-                                        <NavLink to={`/leaderboard/expert`}>
+                                        <NavLink to={`/${username}/leaderboard/expert`}>
                                             Expert
                                         </NavLink>
                                     </button>
                                 </div>
-                            </div>   
-                                <div className="tablescore">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th className='right'>Rank</th>
-                                                <th className='right'>Name</th>
-                                                <th className='right'>Time</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className='row'>
-                                            <TableLeader score={currentPost} />
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage}/>
                             </div>
+                            <div className="tablescore">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className='right'>Rank</th>
+                                            <th className='right'>Name</th>
+                                            <th className='right'>Time</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className='row'>
+                                        <TableLeader score={currentPost} />
+                                    </tbody>
+                                </table>
+                            </div>
+                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage} />
+                        </div>
                     </div>
                 </div>
             </div>
