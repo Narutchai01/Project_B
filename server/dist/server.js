@@ -17,7 +17,6 @@ exports.dbname = void 0;
 const LoginController_1 = __importDefault(require("./controller/LoginController"));
 const cors = require('cors');
 const express_1 = __importDefault(require("express"));
-const bcrypt = require('bcrypt');
 const config_1 = require("./config");
 const body_parser_1 = require("body-parser");
 const cookieParser = require('cookie-parser');
@@ -25,6 +24,7 @@ const jwt = require('jsonwebtoken');
 const DatabaseMG_1 = require("./controller/DatabaseMG");
 const RegisterController_1 = __importDefault(require("./controller/RegisterController"));
 const auth_1 = require("./middleware/auth");
+const RecordsConTroller_1 = __importDefault(require("./controller/RecordsConTroller"));
 //define
 const app = (0, express_1.default)();
 const PORT = config_1.config.port || 3000;
@@ -39,7 +39,7 @@ app.use(cors({
 app.use(cookieParser());
 // app.use(cors(header));
 // connect to db
-DatabaseMG_1.dbMG.connectTODB();
+// dbMG.connectTODB();
 // routes
 app.post('/api/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -50,9 +50,7 @@ app.post('/api/register', (req, res) => __awaiter(void 0, void 0, void 0, functi
             res.status(400).send('bad request');
             return false;
         }
-        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne({
-            data: result,
-        });
+        yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').insertOne(result);
         res.status(200).send(result);
     }
     catch (err) {
@@ -90,11 +88,33 @@ app.get('/api/logout', auth_1.auth, (req, res) => __awaiter(void 0, void 0, void
         console.log(err);
     }
 }));
-app.get('/api/:user', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const username = req.params.user;
+app.get('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').find().toArray();
+        res.status(200).send(users);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}));
+app.get('/api/showscore', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find().toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}));
+app.get('/api/:username', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.params.username;
     try {
         const user = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('users').findOne({
-            'data.username': username,
+            username: username
         });
         if (!user) {
             res.status(404).send('user not found');
@@ -104,6 +124,51 @@ app.get('/api/:user', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (err) {
         console.log(err);
+        DatabaseMG_1.dbMG.connectTODB();
+    }
+}));
+app.post('/api/records', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { username, gameMode, time } = req.body;
+        const recordsController = new RecordsConTroller_1.default(gameMode, username, time);
+        if (!recordsController) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').insertOne(recordsController);
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}));
+app.get('/api/showscore/:mode', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const mode = req.params.mode;
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find({ gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}));
+app.get('/api/showscore/:username/:mode', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const username = req.params.username;
+        const mode = req.params.mode;
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find({ username: username, gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error);
     }
 }));
 app.listen(PORT, () => {

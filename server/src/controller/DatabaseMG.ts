@@ -26,6 +26,7 @@ class DatabaseMG {
     getClose(){
         this.client.close();
     }
+    
 }
 
 

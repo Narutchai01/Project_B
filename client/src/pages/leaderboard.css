@@ -1,0 +1,159 @@
+.leaderboard {
+    height: 100vh;
+    width: 100vw;
+    background-color: #7091F5;
+    font-family: 'mitr', sans-serif;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.container-leaderboard {
+    padding: 20px 60px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    
+}
+.content{
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px 50px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.title {
+    text-align: center;
+    font-size: 48px;
+    text-shadow: 0px 4px 4px rgba(155, 155, 155, 0.3);
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.Returnbtn {
+    font-size: 30px;
+    margin-top: 20px;
+    color: #7091F5;
+    padding-left: 30px;
+    width: 10%;
+}
+
+.Maintitle {
+    width: 100%;
+}
+
+.leadertable {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.difficulty {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+.difficulty-btn {
+    border-radius: 50px;
+    background-color: #7091F5;
+    padding: 8px 16px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
+.difficulty-btn-active {
+    border-radius: 50px;
+    background-color: #5254D8;
+    padding: 8px 16px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
+
+.tablescore {
+    border-radius: 20px;
+    padding: 10px 30px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+table{
+    width: 100%;
+    height: 100%;
+    padding-top: 40px;
+    border-radius: 50px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    border: 1px;
+}
+
+thead {
+    font-size: 18px;
+}
+
+thead tr  th{
+    padding: 10px 0px;
+}
+
+tbody{
+    text-align: center;
+
+}
+
+.tablerow td {
+    padding: 15px 0px;
+    
+}
+
+.right {
+    border: rgb(212, 212, 212) solid;
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+tr td {
+    border: rgb(212, 212, 212) solid;
+    border-left: 0px;
+    border-bottom: 0px;
+}
+
+.noright {
+    border: rgb(212, 212, 212) solid;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;
+    gap: 10px;
+    padding-left: 30px;
+}
+
+.pageNumber-btn{
+    border-radius: 15px;
+    background-color: #7091F5;
+    padding: 3px 10px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
+
+.pageNumber-btn-active{
+    border-radius: 15px;
+    background-color: #5254D8;
+    padding: 2px 8px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
