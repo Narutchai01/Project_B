@@ -10,7 +10,7 @@ import { IoArrowUndoSharp } from 'react-icons/io5'
 const Leaderboard = () => {
 
     const { username, mode } = useParams()
-    const scoreURL = `http://localhost:8080/api/showscore/${mode}`
+    const scoreURL = `http://localhost:8080/api/showscorebymode/${mode}`
 
     const [score, setScore] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -21,6 +21,29 @@ const Leaderboard = () => {
     const pagination = (pageNumber) => setCurrentPage(pageNumber)
 
 
+    score.sort((a, b) => {
+        if (a.time.minutes < b.time.minutes) {
+            return -1
+        }
+        if (a.time.minutes > b.time.minutes) {
+            return 1
+        }
+        if (a.time.seconds < b.time.seconds) {
+            return -1
+        }
+        if (a.time.seconds > b.time.seconds) {
+            return 1
+        }
+        if (a.time.milliseconds < b.time.milliseconds) {
+            return -1
+        }
+        if (a.time.milliseconds > b.time.milliseconds) {
+            return 1
+        }
+        return 0
+    });
+
+    
 
 
     useEffect(() => {

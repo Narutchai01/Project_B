@@ -72,7 +72,6 @@ const Button = ({ position, GameData, SideProp }) => {
     const losing = () => {
         revealAllMines()
         GameData.setGameState('LOSING')
-        console.log('losing')
     }
 
     const isWinning = () => {
@@ -84,7 +83,6 @@ const Button = ({ position, GameData, SideProp }) => {
     }
 
     const winning = () => {
-        console.log('winning')
         GameData.setGameState('WINNING')
     }
 

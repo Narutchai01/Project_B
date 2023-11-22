@@ -61,24 +61,11 @@ const Cube = () => {
 const Homepage = () => {
 
     const { username } = useParams()
-    const [User, setUser] = useState({})
+    // const [User, setUser] = useState({})
 
-    const getUser = async () => {
-        try {
-            const res = await axios.get(`http://localhost:8080/api/${username}`).then(res => {
-                setUser(res.data)
-            })
-            console.log(res.data);
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
 
-    console.log(User);
-    useEffect(() => {
-        getUser()
-    })
+
+    
 
 
     return (
@@ -95,15 +82,23 @@ const Homepage = () => {
                     </Canvas>
                 </div>
                 <div className="Difficulty">
-                    <h1>
-                        Beginner
-                    </h1>
-                    <h1>
-                        Intermediate
-                    </h1>
-                    <h1>
-                        Expert
-                    </h1>
+                    <ul>
+                        <li>
+                            <Link to={`/${username}/gamepage/beginner`}>
+                                <h1>Beginner</h1>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={`/${username}/gamepage/intermediate`}>
+                                <h1>Intermediate</h1>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={`/${username}/gamepage/expert`}>
+                                <h1>Expert</h1>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
                 <hr className="Line"></hr>
             </div>

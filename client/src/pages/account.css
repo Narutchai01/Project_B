@@ -92,3 +92,18 @@
     gap: 10px;
     padding-left: 30px;
 }
+.pageNumber-btn{
+    border-radius: 15px;
+    background-color: #7091F5;
+    padding: 3px 10px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}
+
+.pageNumber-btn-active{
+    border-radius: 15px;
+    background-color: #5254D8;
+    padding: 2px 8px;
+    box-shadow: 1px 2px 4px 1px #c5c5c5;
+    color: #FFFF;
+}

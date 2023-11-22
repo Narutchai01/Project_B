@@ -1,4 +1,4 @@
-import {  useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, RoundedBox, Text } from '@react-three/drei'
@@ -10,7 +10,7 @@ import { init } from '../util/Init'
 
 
 class GameFunc {
-  constructor(setFlagText, startTimer, stopTimer, setIconText){
+  constructor(setFlagText, startTimer, stopTimer, setIconText) {
     this.setFlagText = setFlagText
     this.startTimer = startTimer
     this.stopTimer = stopTimer
@@ -58,16 +58,38 @@ const GameBoard = ({ size, mineNum, setAppState }) => {
     <>
       <ambientLight intensity={0.5} color={'lightblue'} />
       <OrbitControls enablePan={false} />
-      <pointLight intensity={0.4} color={'red'} position={[size*2, size*2, size]} />
-      <pointLight intensity={0.7} color={'purple'} position={[-size*2, -size, -size*2]} />
+      <pointLight intensity={0.4} color={'red'} position={[size * 2, size * 2, size]} />
+      <pointLight intensity={0.7} color={'purple'} position={[-size * 2, -size, -size * 2]} />
       <MineCube size={size} dict={dict} mineNum={mineNum} GameFunc={GameFunction} setAppState={setAppState} />
     </>
   )
 }
 
 
-const Game = ({ setAppState }) => {
-  
+const Game = ({ mode,minutes,seconds, setAppState }) => {
+
+  const difficultys = [[5, 25], [7, 60], [9, 111]]
+
+  const createGame = (mode) => {
+    if (mode === 'beginner') {
+      const size = difficultys[0][0]
+      const mineNum = difficultys[0][1]
+      return <GameBoard size={size} mineNum={mineNum} setAppState={setAppState} />
+    }
+    else if (mode === 'intermediate') {
+      const size = difficultys[1][0]
+      const mineNum = difficultys[1][1]
+      return <GameBoard size={size} mineNum={mineNum} setAppState={setAppState} />
+    }
+    else if (mode === 'expert') {
+      const size = difficultys[2][0]
+      const mineNum = difficultys[2][1]
+      return <GameBoard size={size} mineNum={mineNum} setAppState={setAppState} />
+    }
+    
+  }
+
+
   return (
     <>
       <div className='gameBar'>
@@ -78,13 +100,14 @@ const Game = ({ setAppState }) => {
           <span className='material-symbols-rounded'></span>
         </div>
         <div className='gameBarComponent timer'>
-          <div className='time'>00:00</div>
+          <div className='time'>{minutes}:{seconds}</div>
         </div>
       </div>
       <div className='game'>
         <div className='canvas'>
           <Canvas>
-            <GameBoard size={5} mineNum={20} setAppState={setAppState}/>
+            {/* <GameBoard size={5} mineNum={20} setAppState={setAppState} /> */}
+            {createGame(mode)}
           </Canvas>
         </div>
       </div>
