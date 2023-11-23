@@ -151,7 +151,7 @@ const Account = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="tablescore">
+                            <div className="account-tablescore">
                                 <table>
                                     <thead>
                                         <tr>

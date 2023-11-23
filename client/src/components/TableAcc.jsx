@@ -14,7 +14,7 @@ const TableAcc = ({ score }) => {
                     <td>{index + 1}</td>
                     <td>{item.username}</td>
                     <td>{time}</td>
-                    <td>{item.date}</td>
+                    <td className='noright'>{item.date}</td>
                 </tr>
             )
         })}

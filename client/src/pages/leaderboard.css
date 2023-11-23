@@ -77,7 +77,7 @@
     color: #FFFF;
 }
 
-.tablescore {
+.leader-tablescore {
     border-radius: 20px;
     padding: 10px 30px;
     background-color: white;
@@ -107,11 +107,6 @@ thead tr  th{
 tbody{
     text-align: center;
 
-}
-
-.tablerow td {
-    padding: 15px 0px;
-    
 }
 
 .right {

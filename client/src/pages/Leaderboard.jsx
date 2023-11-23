@@ -98,7 +98,7 @@ const Leaderboard = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="tablescore">
+                            <div className="leader-tablescore">
                                 <table>
                                     <thead>
                                         <tr>
