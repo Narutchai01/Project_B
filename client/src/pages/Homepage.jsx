@@ -15,33 +15,6 @@ const Cube = () => {
 
     const navigate = useNavigate()
     const [LeaderboardHover, setLeaderboardhover] = useState(false)
-
-
-    return (
-        <mesh rotation={[0.8, -0.785, 0]}>
-            <ambientLight intensity={0.2} color='blue' />
-            <ambientLight intensity={0.2} color='white' />
-            <pointLight intensity={16} color='lightblue' position={[1.8, 2, 2]} />
-            <pointLight intensity={14} color='purple' position={[2, -3, 1.8]} />
-            <mesh>
-                <boxGeometry attach={'geometry'} args={[2, 2, 2]} />
-                <meshStandardMaterial attach={'material'} color={'white'} />
-                <Text onClick={() => { navigate('/leaderboard/ez') }}
-                    color={LeaderboardHover ? 'black' : 'white'}
-                    position={[0.1, 1.01, 0.1]} scale={[0.4, 0.4, 0.4]}
-                    rotation={[-1.57, 0, 0.784]}
-                    onPointerEnter={() => { setLeaderboardhover(true) }}
-                    onPointerLeave={() => { setLeaderboardhover(false) }}>
-                    Leaderboard
-                </Text>
-
-            </mesh>
-        </mesh>
-    )
-}
-
-const Homepage = () => {
-
     const { username } = useParams()
     const [User, setUser] = useState({})
 
@@ -62,12 +35,44 @@ const Homepage = () => {
         getUser()
     })
 
+    return (
+        <mesh rotation={[0.8, -0.785, 0]}>
+            <ambientLight intensity={0.2} color='blue' />
+            <ambientLight intensity={0.2} color='white' />
+            <pointLight intensity={16} color='lightblue' position={[1.8, 2, 2]} />
+            <pointLight intensity={14} color='purple' position={[2, -3, 1.8]} />
+            <mesh>
+                <boxGeometry attach={'geometry'} args={[2, 2, 2]} />
+                <meshStandardMaterial attach={'material'} color={'white'} />
+                <Text onClick={() => { navigate(`/${username}/leaderboard/beginner`) }}
+                    color={LeaderboardHover ? 'black' : 'white'}
+                    position={[0.1, 1.01, 0.1]} scale={[0.4, 0.4, 0.4]}
+                    rotation={[-1.57, 0, 0.784]}
+                    onPointerEnter={() => { setLeaderboardhover(true) }}
+                    onPointerLeave={() => { setLeaderboardhover(false) }}>
+                    Leaderboard
+                </Text>
+
+            </mesh>
+        </mesh>
+    )
+}
+
+const Homepage = () => {
+
+    const { username } = useParams()
+    // const [User, setUser] = useState({})
+
+
+
+    
+
 
     return (
         <>
             <div className="HomePage">
                 <div className="Account" >
-                    <Link to={`/account/${username}/ez`}>
+                    <Link to={`/account/${username}/beginner`}>
                         <h1><HiMiniUserCircle className="AccountPic" /></h1>
                     </Link>
                 </div>
@@ -77,15 +82,23 @@ const Homepage = () => {
                     </Canvas>
                 </div>
                 <div className="Difficulty">
-                    <h1>
-                        Beginner
-                    </h1>
-                    <h1>
-                        Intermediate
-                    </h1>
-                    <h1>
-                        Expert
-                    </h1>
+                    <ul>
+                        <li>
+                            <Link to={`/${username}/gamepage/beginner`}>
+                                <h1>Beginner</h1>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={`/${username}/gamepage/intermediate`}>
+                                <h1>Intermediate</h1>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={`/${username}/gamepage/expert`}>
+                                <h1>Expert</h1>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
                 <hr className="Line"></hr>
             </div>

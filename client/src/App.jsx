@@ -7,6 +7,8 @@ import Homepage from './pages/Homepage'
 // import Game from './pages/Game'
 import Leaderboard from './pages/Leaderboard'
 import Account from './pages/Account'
+// import Game from './pages/Game'
+import GamePage from './pages/GamePage'
 
 
 const App = () => {
@@ -32,8 +34,9 @@ const App = () => {
       <Routes>
         <Route path='/' element={<LandingPage/>} />
         <Route path='/Homepage/:username' element={<Homepage/>} />
-        <Route path='/leaderboard/:mode' element={<Leaderboard/>} />
+        <Route path='/:username/leaderboard/:mode' element={<Leaderboard/>} />
         <Route path='/account/:username/:mode' element={<Account/>} />
+        <Route path='/:username/gamepage/:mode' element={<GamePage/>} />
       </Routes>
     </>
   )

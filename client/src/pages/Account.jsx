@@ -2,7 +2,7 @@ import './account.css'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { IoArrowUndoSharp } from 'react-icons/io5'
-import { BiSolidUser } from 'react-icons/bi'
+import { BiLogIn, BiSolidUser } from 'react-icons/bi'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
@@ -14,11 +14,37 @@ const Account = () => {
     const [user, setUser] = useState([])
     const { username, mode } = useParams()
     const [score, setScore] = useState([])
+    const [gameData, setGameData] = useState([])
+    const [winRate, setWinRate] = useState([])
 
 
 
     const userURL = `http://localhost:8080/api/${username}`
+    const gameURL = `http://localhost:8080/api/showscore/${username}`
     const scoreURL = `http://localhost:8080/api/showscore/${username}/${mode}`
+    const winratURL = `http://localhost:8080/api/showscorebyusername/${username}/WINNING`
+
+
+
+
+
+    useEffect(() => {
+        const getScore = async () => {
+            await axios.get(winratURL).then((res) => {
+                setWinRate(res.data)
+            })
+        }
+        getScore()
+    }, [winratURL])
+
+    useEffect(() => {
+        const getDataGame = async () => {
+            await axios.get(gameURL).then((res) => {
+                setGameData(res.data)
+            })
+        }
+        getDataGame()
+    }, [gameURL])
 
 
     useEffect(() => {
@@ -33,7 +59,6 @@ const Account = () => {
             })
         }
         getScoreByUser()
-
         getUser()
     }, [userURL, scoreURL])
 
@@ -46,7 +71,28 @@ const Account = () => {
     const pagination = (pageNumber) => setCurrentPage(pageNumber)
 
 
-    // console.log(user);
+    score.sort((a, b) => {
+        if (a.time.minutes < b.time.minutes) {
+            return -1
+        }
+        if (a.time.minutes > b.time.minutes) {
+            return 1
+        }
+        if (a.time.seconds < b.time.seconds) {
+            return -1
+        }
+        if (a.time.seconds > b.time.seconds) {
+            return 1
+        }
+        if (a.time.milliseconds < b.time.milliseconds) {
+            return -1
+        }
+        if (a.time.milliseconds > b.time.milliseconds) {
+            return 1
+        }
+        return 0
+    });
+
 
     return (
         <>
@@ -71,17 +117,17 @@ const Account = () => {
                                 <h1>Username : {user.username}</h1>
                                 <h1>Email : {user.email}</h1>
                             </div>
-                            <h1>Game played : 10000</h1>
+                            <h1>Game played : {gameData.length}</h1>
                             <div className="win-zone">
-                                <h1>Game win : 0</h1>
-                                <h1>Win rate : 0 %</h1>
+                                <h1>Game win : {winRate.length}</h1>
+                                <h1>Win rate : {Math.round((winRate.length / gameData.length) * 100)} %</h1>
                             </div>
-                            <div className="win-zone">
-                                <h1>Best time : 0</h1>
+                            {/* <div className="win-zone">
+                                <h1>Best time :  </h1>
                                 <h1>high Score: 0 </h1>
-                            </div>
+                            </div> */}
                         </div>
-                        <div className='acctable'>    
+                        <div className='acctable'>
                             <div className="difficulty">
                                 <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
                                     <button>
@@ -105,7 +151,7 @@ const Account = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="tablescore"> 
+                            <div className="tablescore">
                                 <table>
                                     <thead>
                                         <tr>
@@ -116,11 +162,11 @@ const Account = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <TableAcc score={currentPost}/>
+                                        <TableAcc score={currentPost} />
                                     </tbody>
                                 </table>
-                            </div>    
-                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination}/>
+                            </div>
+                            <Pagination postPerPage={postPerPage} totalPosts={score.length} paginate={pagination} currentPage={currentPage} />
                         </div>
                     </div>
                 </div>

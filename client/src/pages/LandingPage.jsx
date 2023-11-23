@@ -8,24 +8,23 @@ import LoginPage from './LoginPage'
 import SignUpPage from './SignUpPage'
 
 
-const MenuCube = ({ onClickLogin, onClickSignUp }) => {
+const MenuCube = ({ onClickLogin, onClickSignUp, cubeFocus, setCubeFocus }) => {
   const [loginHover, setLoginHover] = useState(false)
   const [signUpHover, setSignUpHover] = useState(false)
-  const [focus, setFocus] = useState('')
 
   const cubeRef = useRef()
   useFrame((state, delta) => {
-    if (focus == '' && !(cubeRef.current.rotation.y >= -0.005 && cubeRef.current.rotation.y <= 0.005)) 
+    if (cubeFocus == '' && !(cubeRef.current.rotation.y >= -0.005 && cubeRef.current.rotation.y <= 0.005)) 
         cubeRef.current.rotation.y -= Math.sign(cubeRef.current.rotation.y) * 0.015
-    if (focus == 'login' && cubeRef.current.rotation.y >= -0.3)
+    if (cubeFocus == 'login' && cubeRef.current.rotation.y >= -0.3)
       cubeRef.current.rotation.y -= 0.015
-    if (focus == 'signup' && cubeRef.current.rotation.y <= 0.3)
+    if (cubeFocus == 'signup' && cubeRef.current.rotation.y <= 0.3)
       cubeRef.current.rotation.y += 0.015
   })
 
-  const onClickFocus = (btnName) => {
-    if (btnName == focus) setFocus('')
-    else setFocus(btnName)
+  const onClickSetFocus = (btnName) => {
+    if (btnName == cubeFocus) setCubeFocus('')
+    else setCubeFocus(btnName)
   }
 
   return (
@@ -37,14 +36,14 @@ const MenuCube = ({ onClickLogin, onClickSignUp }) => {
       <mesh ref={cubeRef}>
         <boxGeometry attach={'geometry'} args={[2, 2, 2]} />
         <meshStandardMaterial attach={'material'} color={'white'} />
-        <Text onClick={() => {onClickLogin(); onClickFocus('login')}} 
+        <Text onClick={() => {onClickLogin(); onClickSetFocus('login')}} 
               color={loginHover ? 'rgb(9, 4, 15)' : 'white'} 
               position={[0, 0, 1.01]} scale={[0.5, 0.5, 0.5]} 
               onPointerEnter={() => { setLoginHover(true) }} 
               onPointerLeave={() => { setLoginHover(false) }}>
           Login
         </Text>
-        <Text onClick={() => {onClickSignUp(); onClickFocus('signup')}} 
+        <Text onClick={() => {onClickSignUp(); onClickSetFocus('signup')}} 
               color={signUpHover ? 'rgb(9, 4, 15)' : 'white'} 
               position={[1.01, 0, 0]} scale={[0.5, 0.5, 0.5]} 
               rotation={[0, 1.57, 0]} onPointerEnter={() => { setSignUpHover(true) }} 
@@ -82,18 +81,19 @@ const LandingPage = () => {
     else setSignUpPage(false)
   }
   
+  const [cubeFocus, setCubeFocus] = useState('')
   
   return (
     <>
       <div className='landingpage-main-container'>
         <div className={signUpClass}>
           <div className={signUpFormClass}>
-            <SignUpPage setLoginPage={setLoginPage} setSignUpPage={setSignUpPage}/>
+            <SignUpPage setLoginPage={setLoginPage} setSignUpPage={setSignUpPage} setCubeFocus={setCubeFocus}/>
           </div>
         </div>
         <div className='canvas'>
           <Canvas>
-            <MenuCube onClickLogin={onClickLogin} onClickSignUp={onClickSignUp}/>
+            <MenuCube onClickLogin={onClickLogin} onClickSignUp={onClickSignUp} cubeFocus={cubeFocus} setCubeFocus={setCubeFocus}/>
           </Canvas>
         </div>
         <div className={loginClass}>

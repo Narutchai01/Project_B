@@ -129,8 +129,8 @@ app.get('/api/:username', (req, res) => __awaiter(void 0, void 0, void 0, functi
 }));
 app.post('/api/records', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, gameMode, time } = req.body;
-        const recordsController = new RecordsConTroller_1.default(gameMode, username, time);
+        const { username, gameMode, time, stageTus } = req.body;
+        const recordsController = new RecordsConTroller_1.default(gameMode, username, time, stageTus);
         if (!recordsController) {
             res.status(400).send('bad request');
             return false;
@@ -142,10 +142,39 @@ app.post('/api/records', (req, res) => __awaiter(void 0, void 0, void 0, functio
         console.log(error);
     }
 }));
-app.get('/api/showscore/:mode', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/showscore/:username', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const username = req.params;
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find(username).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+}));
+app.get('/api/showscorebymode/:mode', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const mode = req.params.mode;
         const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find({ gameMode: mode }).toArray();
+        if (!result) {
+            res.status(400).send('bad request');
+            return false;
+        }
+        res.status(200).send(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}));
+app.get('/api/showscorebyusername/:username/:stagTus', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const username = req.params.username;
+        const stagTus = req.params.stagTus;
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find({ username: username, stageTus: stagTus }).toArray();
         if (!result) {
             res.status(400).send('bad request');
             return false;
