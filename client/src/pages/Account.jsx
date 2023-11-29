@@ -96,7 +96,7 @@ const Account = () => {
 
     return (
         <>
-            <div className="account">
+            <div className="accountpage">
                 <div className="container-account">
                     <div className="contant-account">
                         <div className="account-header">

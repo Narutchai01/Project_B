@@ -9,14 +9,14 @@
     font-size: 18px;
 }
 
-.container-leaderboard {
+.leaderboard .container-leaderboard {
     padding: 20px 60px;
     margin: 0;
     height: 100%;
     width: 100%;
     
 }
-.content{
+.leaderboard .content{
     height: 100%;
     width: 100%;
     border-radius: 20px;
@@ -28,7 +28,7 @@
     justify-content: space-evenly;
 }
 
-.title {
+.leaderboard .title {
     text-align: center;
     font-size: 48px;
     text-shadow: 0px 4px 4px rgba(155, 155, 155, 0.3);
@@ -37,7 +37,7 @@
     width: 90%;
 }
 
-.Returnbtn {
+.leaderboard .Returnbtn {
     font-size: 30px;
     margin-top: 20px;
     color: #7091F5;
@@ -45,31 +45,31 @@
     width: 10%;
 }
 
-.Maintitle {
+.leaderboard .Maintitle {
     width: 100%;
 }
 
-.leadertable {
+.leaderboard .leadertable {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.difficulty {
+.leaderboard .difficulty {
     display: flex;
     gap: 8px;
     justify-content: flex-end;
     padding-right: 30px;
 }
 
-.difficulty-btn {
+.leaderboard .difficulty-btn {
     border-radius: 50px;
     background-color: #7091F5;
     padding: 8px 16px;
     box-shadow: 1px 2px 4px 1px #c5c5c5;
     color: #FFFF;
 }
-.difficulty-btn-active {
+.leaderboard .difficulty-btn-active {
     border-radius: 50px;
     background-color: #5254D8;
     padding: 8px 16px;
@@ -77,7 +77,7 @@
     color: #FFFF;
 }
 
-.tablescore {
+.leaderboard .tablescore {
     border-radius: 20px;
     padding: 10px 30px;
     background-color: white;
@@ -87,7 +87,7 @@
     height: 100%;
 }
 
-table{
+.leaderboard table{
     width: 100%;
     height: 100%;
     padding-top: 40px;
@@ -96,45 +96,45 @@ table{
     border: 1px;
 }
 
-thead {
+.leaderboard thead {
     font-size: 18px;
 }
 
-thead tr  th{
+.leaderboard thead tr  th{
     padding: 10px 0px;
 }
 
-tbody{
+.leaderboard tbody{
     text-align: center;
 
 }
 
-.tablerow td {
+.leaderboard .tablerow td {
     padding: 15px 0px;
     
 }
 
-.right {
+.leaderboard .right {
     border: rgb(212, 212, 212) solid;
     border-left: 0px;
     border-top: 0px;
     border-bottom: 0px;
 }
 
-tr td {
+.leaderboard tr td {
     border: rgb(212, 212, 212) solid;
     border-left: 0px;
     border-bottom: 0px;
 }
 
-.noright {
+.leaderboard .noright {
     border: rgb(212, 212, 212) solid;
     border-left: 0px;
     border-right: 0px;
     border-bottom: 0px;
 }
 
-.pagination {
+.leaderboard .pagination {
     display: flex;
     flex-direction: row;
     padding-bottom: 15px;
@@ -142,7 +142,7 @@ tr td {
     padding-left: 30px;
 }
 
-.pageNumber-btn{
+.leaderboard .pageNumber-btn{
     border-radius: 15px;
     background-color: #7091F5;
     padding: 3px 10px;
@@ -150,7 +150,7 @@ tr td {
     color: #FFFF;
 }
 
-.pageNumber-btn-active{
+.leaderboard .pageNumber-btn-active{
     border-radius: 15px;
     background-color: #5254D8;
     padding: 2px 8px;

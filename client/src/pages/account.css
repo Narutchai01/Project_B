@@ -1,4 +1,4 @@
-.account{
+.accountpage{
     background-color: #7091F5;
     height: 100vh;
     width: 100vw;
@@ -7,13 +7,13 @@
     align-items: center;
 }
 
-.container-account {
+.accountpage .container-account {
     padding: 20px 50px;
     height: 100%;
     width: 100%;
 }
 
-.contant-account {
+.accountpage .contant-account {
     background-color: #fff;
     padding: 20px 50px 10px 50px;
     border-radius: 15px;
@@ -25,26 +25,26 @@
     /* justify-content: space-evenly; */
 }
 
-.account-header{
+.accountpage .account-header{
     display: flex;
     justify-content: space-between;
     font-size: 18px;
 }
 
-.back2homepage-btn{
+.accountpage .back2homepage-btn{
     font-size: 30px;
     color: #7091F5;
     cursor: pointer;
     padding: 10px;
 }
 
-.header-right{
+.accountpage .header-right{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.icon-user{
+.accountpage .icon-user{
     font-size: 30px;
     color: #7091F5;
     margin-right: 10px;
@@ -53,7 +53,7 @@
     border-radius: 50%;
 }
 
-.userinfo {
+.accountpage .userinfo {
     font-size: 18px;
     padding: 20px;
     padding-left: 10px;
@@ -61,38 +61,38 @@
 
 }
 
-.dataUser{
+.accountpage .dataUser{
     display: flex;
     justify-content: space-between;
     width: 65vw;
 }
-.win-zone{
+
+.accountpage .win-zone{
     display : flex;
     justify-content: space-between;
     width: 40vw;
 }
 
-
-.acctable {
+.accountpage .acctable {
     height: 100%;
     display: flex;
     flex-direction: column;
     padding-top: 20px;
 }
 
-
-.accountrow td {
+.accountpage .accountrow td {
     padding: 3px 0px;
 }
 
-.pagination {
+.accountpage .pagination {
     display: flex;
     flex-direction: row;
     padding-bottom: 15px;
     gap: 10px;
     padding-left: 30px;
 }
-.pageNumber-btn{
+
+.accountpage .pageNumber-btn{
     border-radius: 15px;
     background-color: #7091F5;
     padding: 3px 10px;
@@ -100,7 +100,7 @@
     color: #FFFF;
 }
 
-.pageNumber-btn-active{
+.accountpage .pageNumber-btn-active{
     border-radius: 15px;
     background-color: #5254D8;
     padding: 2px 8px;
