@@ -46,14 +46,19 @@ const LoginPage = () => {
   return (
     <>
       <div className="login-page">
-        <h1 className="">Login</h1>
-        <form>
-          <input type="email" name="email" placeholder="Email" className="" onChange={handleChange}/>
-          <input type="password" name="password" placeholder="Password" className="" onChange={handleChange} />
+        <div className="login-form-container">
+          <h2 className="">Login</h2>
+          <form>
+          <div className="input-container">
+            <input type="email" name="email" placeholder="Email" className="" onChange={handleChange}/>
+            <input type="password" name="password" placeholder="Password" className="" onChange={handleChange} />
+          </div>
           <button type="submit" className="" onClick={handelLogin}>
             Login
           </button>
-        </form>
+          </form>
+        </div>
+        
       </div>
     </>
   )}

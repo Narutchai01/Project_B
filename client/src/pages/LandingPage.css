@@ -1,9 +1,7 @@
 body{
   margin: 0;
   padding: 0;
-  height: 100%; 
   overflow: hidden;
-  background-color: rgb(9, 4, 15);
 }
 
 .landingpage-main-container {
@@ -12,6 +10,7 @@ body{
   height: 100vh;
   justify-content: space-around;
   align-items: center;
+  background-color: rgb(9, 4, 15);
 }
 
 .landingpage-main-container .canvas {
@@ -55,7 +54,6 @@ body{
 .login-form, .sign-up-form {
   width: 40vw;
   height: 100vh;
-  background-color: lightsteelblue;
 }
 
 .login-in {

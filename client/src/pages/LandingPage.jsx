@@ -15,11 +15,11 @@ const MenuCube = ({ onClickLogin, onClickSignUp, cubeFocus, setCubeFocus }) => {
   const cubeRef = useRef()
   useFrame((state, delta) => {
     if (cubeFocus == '' && !(cubeRef.current.rotation.y >= -0.005 && cubeRef.current.rotation.y <= 0.005)) 
-        cubeRef.current.rotation.y -= Math.sign(cubeRef.current.rotation.y) * 0.015
+        cubeRef.current.rotation.y -= Math.sign(cubeRef.current.rotation.y) * 0.01
     if (cubeFocus == 'login' && cubeRef.current.rotation.y >= -0.3)
-      cubeRef.current.rotation.y -= 0.015
+      cubeRef.current.rotation.y -= 0.01
     if (cubeFocus == 'signup' && cubeRef.current.rotation.y <= 0.3)
-      cubeRef.current.rotation.y += 0.015
+      cubeRef.current.rotation.y += 0.01
   })
 
   const onClickSetFocus = (btnName) => {

@@ -19,7 +19,6 @@ class GameFunc {
 }
 
 const GameBoard = ({ size, mineNum, setAppState }) => {
-  console.log('initiating dictionart')
   const dict = init(size, mineNum)
 
   const flagElem = document.querySelector('.flag')
@@ -57,7 +56,7 @@ const GameBoard = ({ size, mineNum, setAppState }) => {
   return (
     <>
       <ambientLight intensity={0.5} color={'lightblue'} />
-      <OrbitControls enablePan={false} />
+      <OrbitControls enablePan={false} minDistance={size} maxDistance={size * 2} />
       <pointLight intensity={0.4} color={'red'} position={[size * 2, size * 2, size]} />
       <pointLight intensity={0.7} color={'purple'} position={[-size * 2, -size, -size * 2]} />
       <MineCube size={size} dict={dict} mineNum={mineNum} GameFunc={GameFunction} setAppState={setAppState} />
@@ -66,29 +65,13 @@ const GameBoard = ({ size, mineNum, setAppState }) => {
 }
 
 
-const Game = ({ mode,minutes,seconds, setAppState }) => {
+const Game = ({ setAppState, difficulty }) => {
 
-  const difficultys = [[5, 25], [7, 60], [9, 111]]
-
-  const createGame = (mode) => {
-    if (mode === 'beginner') {
-      const size = difficultys[0][0]
-      const mineNum = difficultys[0][1]
-      return <GameBoard size={size} mineNum={mineNum} setAppState={setAppState} />
-    }
-    else if (mode === 'intermediate') {
-      const size = difficultys[1][0]
-      const mineNum = difficultys[1][1]
-      return <GameBoard size={size} mineNum={mineNum} setAppState={setAppState} />
-    }
-    else if (mode === 'expert') {
-      const size = difficultys[2][0]
-      const mineNum = difficultys[2][1]
-      return <GameBoard size={size} mineNum={mineNum} setAppState={setAppState} />
-    }
-    
+  var gameDifficulty = {
+    Beginner: [5, 22],
+    intermediate: [7, 60],
+    Expert: [9, 111]
   }
-
 
   return (
     <>
@@ -106,8 +89,7 @@ const Game = ({ mode,minutes,seconds, setAppState }) => {
       <div className='game'>
         <div className='canvas'>
           <Canvas>
-            {/* <GameBoard size={5} mineNum={20} setAppState={setAppState} /> */}
-            {createGame(mode)}
+            <GameBoard size={5} mineNum={20} setAppState={setAppState} />
           </Canvas>
         </div>
       </div>

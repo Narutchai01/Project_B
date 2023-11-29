@@ -33,15 +33,19 @@ const SignUpPage = ({ setSignUpPage, setLoginPage, setCubeFocus }) => {
   return (
     <>
       <div className="sign-up-page">
-        <h1 className="">SignUp</h1>
-        <form className="">
-          <input type="email" name="email" placeholder="Email" className="" onChange={handleChange} />
-          <input type="text" name="username" placeholder="Username" className="" onChange={handleChange} />
-          <input type="password" name="password" placeholder="Password" className="" onChange={handleChange} />
+        <div className="sign-up-form-container">
+          <h2 className="">SignUp</h2>
+          <form className="">
+          <div className="input-container">
+            <input type="email" name="email" placeholder="Email" className="" onChange={handleChange} />
+            <input type="text" name="username" placeholder="Username" className="" onChange={handleChange} />
+            <input type="password" name="password" placeholder="Password" className="" onChange={handleChange} />
+          </div>
           <button type="submit" className="" onClick={handelSignUp}>
               Create Account
           </button>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   )}

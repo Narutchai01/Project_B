@@ -5,11 +5,62 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(45deg, #a58edb, rgb(142, 184, 210));
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 72px;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background-color: rgb(9, 4, 15, 0.4);
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
   gap: 32px;
 }
 
-.login-page > form {
+.login-page form .input-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+}
+
+.login-page h2 {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.login-page form input {
+  width: 240px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255, 1);
+}
+
+.login-page form input:focus {
+  background-color: white;
+  outline: none;
+}
+
+.login-page form button[type='submit'] {
+  color: white;
+  padding: 8px;
+  background-color: rgb(9, 4, 15, 0.6);
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.login-page form button[type='submit']:hover {
+  background-color: white;
+  color: rgb(9, 4, 15);
+}
+
+.login-page form button[type='submit']:active {
+  transform: scale(0.95);
 }
