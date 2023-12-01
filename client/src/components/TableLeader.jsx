@@ -1,6 +1,6 @@
 import '../pages/leaderboard.css'
 
-const TableLeader = ({score}) => {
+const TableLeader = ({ score, currentPage, postPerPage}) => {
     return (
         <>
         {score.map((item, index) => {
@@ -10,7 +10,7 @@ const TableLeader = ({score}) => {
 
             return (
                 <tr key={index} className="tablerow">
-                    <td>{index + 1}</td>
+                    <td>{(index + 1) + ((currentPage - 1) * postPerPage)}</td>
                     <td>{item.username}</td>
                     <td >{time}</td>
                     <td className='noright'>{item.date}</td>

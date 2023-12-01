@@ -1,109 +1,123 @@
-.accountpage{
-    background-color: #7091F5;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Mitr',  sans-serif;
-    display: flex;
-    align-items: center;
+.accountpage {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(9, 4, 15);
+  font-family: 'mitr', sans-serif;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 }
 
 .accountpage .container-account {
-    padding: 20px 50px;
-    height: 100%;
-    width: 100%;
+  padding: 20px 60px;
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
-.accountpage .contant-account {
-    background-color: #fff;
-    padding: 20px 50px 10px 50px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-evenly; */
+.accountpage .content-account {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  padding: 24px 48px;
+  background: linear-gradient(45deg, #a58edb, rgb(142, 184, 210));
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 12px;
 }
 
-.accountpage .account-header{
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
+.accountpage .account-header {
+  display: flex;
+  justify-content: space-between;
 }
 
-.accountpage .back2homepage-btn{
-    font-size: 30px;
-    color: #7091F5;
-    cursor: pointer;
-    padding: 10px;
+.accountpage .return-btn {
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
 }
 
-.accountpage .header-right{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.accountpage .header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.accountpage .icon-user{
-    font-size: 30px;
-    color: #7091F5;
-    margin-right: 10px;
-    border: 2px solid black;
-    padding: 7px;
-    border-radius: 50%;
+.accountpage .icon-user {
+  font-size: 30px;
+  color: rgb(9, 4, 15);
+  padding: 6px;
+  border-radius: 50%;
+  background-color: white;
 }
 
-.accountpage .userinfo {
-    font-size: 18px;
-    padding: 20px;
-    padding-left: 10px;
-    font-weight: 400;
-
+.accountpage .dataUser {
+  display: flex;
+  justify-content: space-between;
+  width: 65vw;
 }
 
-.accountpage .dataUser{
-    display: flex;
-    justify-content: space-between;
-    width: 65vw;
-}
-
-.accountpage .win-zone{
-    display : flex;
-    justify-content: space-between;
-    width: 40vw;
+.accountpage .win-zone {
+  display: flex;
+  justify-content: space-between;
+  width: 40vw;
 }
 
 .accountpage .acctable {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.accountpage .accountrow td {
-    padding: 3px 0px;
+.acctable .difficulty {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
+}
+
+.acctable .difficulty-btn {
+  border-radius: 50px;
+  background-color: rgba(17, 7, 30, 0.8);
+  padding: 8px 16px;
+  color: #FFFF;
+}
+
+.acctable .difficulty-btn:active {
+  scale: 0.95;
+}
+
+.acctable .difficulty-btn-active {
+  border-radius: 50px;
+  background-color: #5254D8;
+  padding: 8px 16px;
+  color: #FFFF;
+}
+
+.accountpage table {
+  width: 100%;
+  height: 100%;
 }
 
 .accountpage .pagination {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 15px;
-    gap: 10px;
-    padding-left: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
-.accountpage .pageNumber-btn{
-    border-radius: 15px;
-    background-color: #7091F5;
-    padding: 3px 10px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    color: #FFFF;
+.accountpage .pageNumber-btn {
+  border-radius: 16px;
+  background-color: rgba(17, 7, 30, 0.8);
+  padding: 4px 8px;
+  color: #FFFF;
 }
 
-.accountpage .pageNumber-btn-active{
-    border-radius: 15px;
-    background-color: #5254D8;
-    padding: 2px 8px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    color: #FFFF;
+.accountpage .pageNumber-btn-active {
+  border-radius: 16px;
+  background-color: #5254D8;
+  padding: 4px 8px;
+  color: #FFFF;
 }

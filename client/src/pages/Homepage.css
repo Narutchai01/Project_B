@@ -61,10 +61,9 @@
 .homepage .Line {
   width: 90%;
   border: 1px solid;
-  height: 0.3%;
+  height: 4px;
   position: absolute;
   bottom: 2.5%;
   left: 5%;
-  background-color: #FFFF;
-  color: #FFFF;
+  background: linear-gradient(45deg, #a58edb, rgb(142, 184, 210));
 }

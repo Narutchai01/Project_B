@@ -1,159 +1,143 @@
 .leaderboard {
-    height: 100vh;
-    width: 100vw;
-    background-color: #7091F5;
-    font-family: 'mitr', sans-serif;
-    font-style: normal;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(9, 4, 15);
+  font-family: 'mitr', sans-serif;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 }
 
 .leaderboard .container-leaderboard {
-    padding: 20px 60px;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    
+  padding: 20px 60px;
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
-.leaderboard .content{
-    height: 100%;
-    width: 100%;
-    border-radius: 20px;
-    padding: 10px 50px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+
+.leaderboard .content {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  padding: 24px 48px;
+  background: linear-gradient(45deg, #a58edb, rgb(142, 184, 210));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 12px;
 }
 
 .leaderboard .title {
-    text-align: center;
-    font-size: 48px;
-    text-shadow: 0px 4px 4px rgba(155, 155, 155, 0.3);
-    display: flex;
-    flex-direction: row;
-    width: 90%;
+  text-align: center;
+  font-size: 48px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-weight: bold;
+  position: relative;
 }
 
-.leaderboard .Returnbtn {
-    font-size: 30px;
-    margin-top: 20px;
-    color: #7091F5;
-    padding-left: 30px;
-    width: 10%;
+.leaderboard .return-btn {
+  font-size: 30px;
+  color: white;
+  position: absolute;
+  top: 12px;
+}
+
+.leaderboard .Returnbtn:hover {
+  color:#5254D8;
 }
 
 .leaderboard .Maintitle {
-    width: 100%;
+  width: 100%;
 }
 
 .leaderboard .leadertable {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .leaderboard .difficulty {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    padding-right: 30px;
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
 }
 
 .leaderboard .difficulty-btn {
-    border-radius: 50px;
-    background-color: #7091F5;
-    padding: 8px 16px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    color: #FFFF;
+  border-radius: 50px;
+  background-color: rgba(17, 7, 30, 0.8);
+  padding: 8px 16px;
+  color: #FFFF;
 }
+
+.leaderboard .difficulty-btn:active {
+  scale: 0.95;
+}
+
 .leaderboard .difficulty-btn-active {
-    border-radius: 50px;
-    background-color: #5254D8;
-    padding: 8px 16px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    color: #FFFF;
+  border-radius: 50px;
+  background-color: #5254D8;
+  padding: 8px 16px;
+  color: #FFFF;
 }
 
-.leaderboard .tablescore {
-    border-radius: 20px;
-    padding: 10px 30px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+.tablescore {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
-.leaderboard table{
-    width: 100%;
-    height: 100%;
-    padding-top: 40px;
-    border-radius: 50px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    border: 1px;
+.tablescore table {
+  width: 100%;
+  height: 100%;
 }
 
-.leaderboard thead {
-    font-size: 18px;
+.tablescore thead tr th {
+  padding: 16px 0px;
+  border: solid white;
+  border-width: 0px 2px 0px 0px;
+}
+.tablescore thead tr th:last-child {
+  border-width: 0px;
 }
 
-.leaderboard thead tr  th{
-    padding: 10px 0px;
+.tablescore tbody {
+  text-align: center;
 }
 
-.leaderboard tbody{
-    text-align: center;
-
+.tablescore tr td {
+  border: solid rgb(255, 255, 255);
+  border-width: 2px 2px 0px 0px;
 }
 
-.leaderboard .tablerow td {
-    padding: 15px 0px;
-    
-}
-
-.leaderboard .right {
-    border: rgb(212, 212, 212) solid;
-    border-left: 0px;
-    border-top: 0px;
-    border-bottom: 0px;
-}
-
-.leaderboard tr td {
-    border: rgb(212, 212, 212) solid;
-    border-left: 0px;
-    border-bottom: 0px;
-}
-
-.leaderboard .noright {
-    border: rgb(212, 212, 212) solid;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
+.tablescore .noright {
+  border: solid rgb(255, 255, 255);
+  border-width: 2px 0px 0px 0px;
 }
 
 .leaderboard .pagination {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 15px;
-    gap: 10px;
-    padding-left: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
-.leaderboard .pageNumber-btn{
-    border-radius: 15px;
-    background-color: #7091F5;
-    padding: 3px 10px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    color: #FFFF;
+.leaderboard .pageNumber-btn {
+  border-radius: 16px;
+  background-color: rgba(17, 7, 30, 0.8);
+  padding: 4px 8px;
+  color: #FFFF;
 }
 
-.leaderboard .pageNumber-btn-active{
-    border-radius: 15px;
-    background-color: #5254D8;
-    padding: 2px 8px;
-    box-shadow: 1px 2px 4px 1px #c5c5c5;
-    color: #FFFF;
+.leaderboard .pageNumber-btn-active {
+  border-radius: 16px;
+  background-color: #5254D8;
+  padding: 4px 8px;
+  color: #FFFF;
 }
