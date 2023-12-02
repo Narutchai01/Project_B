@@ -40,7 +40,7 @@
 
 .leaderboard .return-btn {
   font-size: 30px;
-  color: white;
+  color: rgba(17, 7, 30, 0.8);
   position: absolute;
   top: 12px;
 }
@@ -102,10 +102,10 @@
 .tablescore thead tr th {
   padding: 16px 0px;
   border: solid white;
-  border-width: 0px 2px 0px 0px;
+  border-width: 0px 2px 2px 0px;
 }
 .tablescore thead tr th:last-child {
-  border-width: 0px;
+  border-width: 0px 0px 2px 0px;
 }
 
 .tablescore tbody {

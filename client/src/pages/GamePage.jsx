@@ -1,7 +1,9 @@
-import Game from "./Game"
+import GameBoard from "./GameBoard"
 import axios from "axios"
 import { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom"
+
+import './GamePage.css'
 
 
 const GamePage = () => {
@@ -27,12 +29,27 @@ const GamePage = () => {
 
 
 
+  var gameDifficulty = {
+    beginner: {
+      size: 5,
+      mine: 22
+    },
+    intermediate: {
+      size: 7,
+      mine: 60
+    },
+    expert: {
+      size: 9,
+      mine: 111
+    }
+  }
+
   // toggle gameObject
   const [gameStart, setGameStart] = useState(false)
-  const [gameObj, setGameObj] = useState(<Game mode={mode} minutes={minutes} seconds={seconds} to setAppState={setStage} />)
+  const [gameObj, setGameObj] = useState(<GameBoard size={gameDifficulty[mode].size} mineNum={gameDifficulty[mode].mine} setAppState={setStage} />)
   const toggleGameObj = () => {
     setGameStart(!gameStart)
-    if (gameStart) setGameObj(<Game setAppState={setStage} />)
+    if (gameStart) setGameObj(<GameBoard size={gameDifficulty[mode].size} mineNum={gameDifficulty[mode].mine} setAppState={setStage} />)
     else setGameObj()
   }
 
@@ -57,9 +74,12 @@ const GamePage = () => {
   return (
     <>
       <div>{stage}</div>
-      <h1>{mode}</h1>
+      <div>{mode}</div>
+      <div>{time}</div>
       <button onClick={toggleGameObj}>Toggle</button>
-      {gameObj}
+      <div className="game-container">
+        {gameObj}
+      </div>
     </>
   )
 }
