@@ -19,6 +19,7 @@ const Leaderboard = () => {
   const indexOfFirstPost = indexOfLastPost - postPerPage
   const currentPost = score.slice(indexOfFirstPost, indexOfLastPost)
   const pagination = (pageNumber) => setCurrentPage(pageNumber)
+  const setDefaultPage = () => setCurrentPage(1)
 
 
   score.sort((a, b) => {
@@ -77,21 +78,21 @@ const Leaderboard = () => {
             <div className='leadertable'>
               <div className="difficulty">
                 <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                  <button>
+                  <button onClick={setDefaultPage}>
                     <NavLink to={`/${username}/leaderboard/beginner`}>
                       Beginner
                     </NavLink>
                   </button>
                 </div>
                 <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                  <button>
+                  <button onClick={setDefaultPage}>
                     <NavLink to={`/${username}/leaderboard/intermediate`}>
                       Intermediate
                     </NavLink>
                   </button>
                 </div>
                 <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                  <button>
+                  <button onClick={setDefaultPage} >
                     <NavLink to={`/${username}/leaderboard/expert`}>
                       Expert
                     </NavLink>

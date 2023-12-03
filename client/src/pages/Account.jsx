@@ -2,7 +2,7 @@ import './Account.css'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { IoArrowUndoSharp } from 'react-icons/io5'
-import { BiLogIn, BiSolidUser } from 'react-icons/bi'
+import { BiSolidUser } from 'react-icons/bi'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
@@ -67,6 +67,7 @@ const Account = () => {
   const indexOfLastPost = currentPage * postPerPage
   const indexOfFirstPost = indexOfLastPost - postPerPage
   const currentPost = score.slice(indexOfFirstPost, indexOfLastPost)
+  const setDefultPage = () => setCurrentPage(1)
 
   const pagination = (pageNumber) => setCurrentPage(pageNumber)
 
@@ -131,21 +132,21 @@ const Account = () => {
             <div className='acctable'>
               <div className="difficulty">
                 <div className={mode === 'beginner' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                  <button>
+                  <button onClick={setDefultPage} >
                     <NavLink to={`/account/${username}/beginner`}>
                       Beginner
                     </NavLink>
                   </button>
                 </div>
                 <div className={mode === 'intermediate' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                  <button>
+                  <button onClick={setDefultPage} >
                     <NavLink to={`/account/${username}/intermediate`}>
                       Intermediate
                     </NavLink>
                   </button>
                 </div>
                 <div className={mode === 'expert' ? 'difficulty-btn-active' : 'difficulty-btn'}>
-                  <button>
+                  <button onClick={setDefultPage} >
                     <NavLink to={`/account/${username}/expert`}>
                       Expert
                     </NavLink>
