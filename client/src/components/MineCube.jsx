@@ -25,8 +25,6 @@ const Button = ({ position, GameData, SideProp }) => {
   let [flagged, setFlag] = useState(false)
   let isMined = thisCell.isMined
 
-  let totalCellRevealed = 0
-
   const revealAllMines = () => {
     GameData.dict.forEach((cell, name) => {
       if (cell.isMined) GameData.setReveal(name)
@@ -98,7 +96,7 @@ const Button = ({ position, GameData, SideProp }) => {
       return
     }
 
-    totalCellRevealed += revealCells(cord)
+    GameData.GameFunc.addTotalRevealedCell(revealCells(cord))
 
     if (isWinning()) {
       winning()
@@ -230,12 +228,10 @@ const MineCube = ({ size, dict, mineNum, GameFunc, setAppState }) => {
       return
     }
     if (gameState == 'INPROGRESS') {
-      console.log('start')
       GameFunc.startTimer()
       setAppState(gameState)
     }
     if (gameState == 'WINNING' || gameState == 'LOSING') {
-      console.log('stop')
       GameFunc.stopTimer()
       setAppState(gameState)
     }
