@@ -71,7 +71,7 @@ const GamePage = () => {
           minutes: Math.floor(time/60),
           seconds: (time % 60),
         },
-        tileRevealed: ((Math.pow(gameData.size, 2) * 6) / totalRevealedCell) * 100
+        tileRevealed: (totalRevealedCell / (Math.pow(gameData.size, 2) * 6)) * 100
       })
     }
   }, [state, username, mode, time, totalRevealedCell])
