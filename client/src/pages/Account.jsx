@@ -72,27 +72,6 @@ const Account = () => {
   const pagination = (pageNumber) => setCurrentPage(pageNumber)
 
 
-  score.sort((a, b) => {
-    if (a.time.minutes < b.time.minutes) {
-      return -1
-    }
-    if (a.time.minutes > b.time.minutes) {
-      return 1
-    }
-    if (a.time.seconds < b.time.seconds) {
-      return -1
-    }
-    if (a.time.seconds > b.time.seconds) {
-      return 1
-    }
-    if (a.time.milliseconds < b.time.milliseconds) {
-      return -1
-    }
-    if (a.time.milliseconds > b.time.milliseconds) {
-      return 1
-    }
-    return 0
-  });
 
 
   return (
@@ -162,6 +141,7 @@ const Account = () => {
                       <th>Name</th>
                       <th>score</th>
                       <th>date</th>
+                      <th>tileRevealed</th>
                     </tr>
                   </thead>
                   <tbody>

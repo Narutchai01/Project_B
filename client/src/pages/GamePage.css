@@ -38,35 +38,40 @@
   padding: 32px 8px 0px 8px;
 }
 
-.gamepage .widget-contanier .menu:hover .dropdown-content {
+.gamepage .widget-contanier .menu .dropdown-content-active {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 64px;
+  padding: 32px 8px 0px 8px;
 }
 
-.gamepage .widget-contanier .menu .dropdown-content .content-container {
+.gamepage .widget-contanier .menu .dropdown-content-active .content-container {
   display: flex;
   flex-direction: row;
 }
-.gamepage .widget-contanier .menu .dropdown-content .line {
+.gamepage .widget-contanier .menu .dropdown-content-active .line {
   width: 100%;
-  height:  4px;
+  height: 4px;
   background: linear-gradient(45deg, #a58edb, rgb(142, 184, 210));
 }
 
-.gamepage .menu .dropdown-content button{
+.gamepage .menu .dropdown-content-active button {
   color: white;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-.gamepage .menu .dropdown-content button:hover{
-  color: #7091F5;
+.gamepage .menu .dropdown-content-active button:hover {
+  color: #7091f5;
 }
 
 .gamepage .game-container {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(9, 4, 15)
+  background-color: rgb(9, 4, 15);
 }
-

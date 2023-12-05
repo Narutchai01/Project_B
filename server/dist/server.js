@@ -129,8 +129,8 @@ app.get('/api/:username', (req, res) => __awaiter(void 0, void 0, void 0, functi
 }));
 app.post('/api/records', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, gameMode, time, stageTus } = req.body;
-        const recordsController = new RecordsConTroller_1.default(gameMode, username, time, stageTus);
+        const { username, gameMode, time, stageTus, tileRevealed } = req.body;
+        const recordsController = new RecordsConTroller_1.default(gameMode, username, time, stageTus, tileRevealed);
         if (!recordsController) {
             res.status(400).send('bad request');
             return false;
@@ -159,7 +159,7 @@ app.get('/api/showscore/:username', (req, res) => __awaiter(void 0, void 0, void
 app.get('/api/showscorebymode/:mode', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const mode = req.params.mode;
-        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find({ gameMode: mode }).toArray();
+        const result = yield DatabaseMG_1.dbMG.getClient().db(exports.dbname).collection('records').find({ gameMode: mode, stageTus: "WINNING" }).toArray();
         if (!result) {
             res.status(400).send('bad request');
             return false;

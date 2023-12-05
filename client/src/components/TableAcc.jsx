@@ -15,6 +15,8 @@ const TableAcc = ({ score }) => {
                     <td>{item.username}</td>
                     <td>{time}</td>
                     <td>{item.date}</td>
+                    <td>{item.tileRevealed}</td>
+  
                 </tr>
             )
         })}

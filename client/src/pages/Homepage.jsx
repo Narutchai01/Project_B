@@ -18,7 +18,11 @@ const Cube = () => {
   const { username } = useParams()
   const [User, setUser] = useState({})
 
-  const getUser = async () => {
+  
+
+  console.log(User);
+  useEffect(() => {
+const getUser = async () => {
     try {
       const res = await axios.get(`http://localhost:8080/api/${username}`).then(res => {
         setUser(res.data)
@@ -29,11 +33,8 @@ const Cube = () => {
       console.log(err);
     }
   }
-
-  console.log(User);
-  useEffect(() => {
-    getUser()
-  })
+  getUser()
+  },[username])
 
   return (
     <mesh rotation={[0.8, -0.785, 0]}>
