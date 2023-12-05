@@ -72,7 +72,7 @@ const GamePage = () => {
       seconds: time % 60,
     },
     stageTus: state,
-    tileRevealed: ((Math.pow(gameData.size, 2) * 6) / totalRevealedCell) * 100,
+    tileRevealed: (totalRevealedCell / (Math.pow(gameData.size, 2) * 6)) * 100,
   };
   if (state === "WINNING" || state === "LOSING") {
     axios.post("http://localhost:8080/api/records", data, {
