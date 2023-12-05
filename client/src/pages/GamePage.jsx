@@ -62,7 +62,7 @@ const GamePage = () => {
     }
   };
 
-  let tileRevealed = ((gameData.size ** 2 * 6) / totalRevealedCell) * 100;
+  let tileRevealed = (totalRevealedCell / (Math.pow(gameData.size, 2) * 6)) * 100;
 
   const data = {
     username: username,
