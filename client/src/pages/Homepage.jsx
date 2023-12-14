@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import { HiMiniUserCircle } from "react-icons/hi2";
-import {useNatigate} from 'react-router-dom'
 
 import "./Homepage.css";
 
@@ -74,12 +73,13 @@ const Homepage = () => {
     <>
       <div className="homepage">
         <div className="account">
+          
           <Link to={`/account/${username}/beginner`}>
             <h1>
               <HiMiniUserCircle className="account-pic" />
-            </h1>
+            </h1>  
           </Link>
-            <button onClick={()=>navigate("/")} className="text-red-600">Logout</button>
+            <button onClick={() => navigate("/")} className="logout">Logout</button>
         </div>
         <div className="Box">
           <Canvas>

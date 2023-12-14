@@ -6,21 +6,55 @@
   background-color: rgb(9, 4, 15);
 }
 
-.homepage .account-pic {
-  z-index: 1;
+.homepage .account{
+  width: 5%;
+  height: 10%;
   position: absolute;
-  display: flex;
-  justify-content: end;
   top: 3%;
   right: 2%;
+  display: flex;
+  flex-direction: row-reverse;
+  z-index: 1;
+  gap: 10px;
+  align-items: center;
+  z-index: 1;
+}
+
+.homepage .account-pic {
+  display: flex;
+  justify-content: end;
   width: 4rem;
   height: 4rem;
   color: white;
 }
 
-.homepage .account-pic:hover {
+.homepage .logout{
+  color: aliceblue;
+  display: none;
+  border: 0px solid ;
+  border-radius: 10px;
+  background-color: #7091F5;
+  padding: 10px 30px;
+}
+
+.homepage .logout:hover {
+  background-color: #7091F5;
+  border-bottom: solid 2px white;  
+  transition: transform 250ms ease-out;
+}
+
+.account:hover .logout{
+  display: inline-block;
+}
+
+.account:hover .account-pic{
   color: #7091F5;
 }
+
+.homepage .account .account-pic:hover  {
+  color: #7091F5;
+}
+
 
 .homepage .Box {
   width: 100%;
