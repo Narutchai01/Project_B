@@ -8,10 +8,12 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import TableAcc from '../components/TableAcc'
 import Pagination from '../components/Pagination'
+import {useNavigate} from 'react-router-dom'
 
 const Account = () => {
 
   const [user, setUser] = useState([])
+  const navigate = useNavigate()
   const { username, mode } = useParams()
   const [score, setScore] = useState([])
   const [gameData, setGameData] = useState([])
@@ -90,6 +92,7 @@ const Account = () => {
                 <div className='icon-user'>
                   <BiSolidUser />
                 </div>
+                <button onClick={()=>navigate("/")}>logout</button>
               </div>
             </div>
             <div className="userinfo">
